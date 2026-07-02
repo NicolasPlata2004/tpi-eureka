@@ -85,9 +85,8 @@ export default function Balanza({
       <div className="relative w-full h-[120px] mt-4">
         {/* Barra superior de la balanza (brazo) */}
         <div
-          className={`absolute left-1/2 top-[12px] -translate-x-1/2 w-[340px] h-[6px] rounded bg-tinta origin-center transition-transform duration-500 ${
-            resuelto ? 'rotate-0' : 'rotate-0'
-          }`}
+          style={{ transform: `translateX(-50%) rotate(${isDragging ? -4 : 0}deg)` }}
+          className="absolute left-1/2 top-[12px] w-[340px] h-[6px] rounded bg-tinta origin-center transition-transform duration-300 ease-out"
         />
 
         {/* Eje central */}
@@ -96,10 +95,14 @@ export default function Balanza({
         <div className="absolute left-1/2 top-[92px] -translate-x-1/2 w-[110px] h-[8px] bg-tinta rounded" />
 
         {/* Hilo Izquierdo */}
-        <div className="absolute left-[70px] top-[15px] w-[1.5px] h-[34px] bg-slate-500" />
+        <div
+          style={{ transform: `translateY(${isDragging ? -12 : 0}px)` }}
+          className="absolute left-[70px] top-[15px] w-[1.5px] h-[34px] bg-slate-500 transition-transform duration-300 ease-out"
+        />
         {/* Platillo Izquierdo */}
         <div
-          className={`absolute left-[15px] top-[48px] w-[112px] h-[44px] rounded-b-2xl bg-bg-soft2 border-2 border-blue-action flex items-center justify-center gap-1 transition-all duration-500`}
+          style={{ transform: `translateY(${isDragging ? -12 : 0}px)` }}
+          className={`absolute left-[15px] top-[48px] w-[112px] h-[44px] rounded-b-2xl bg-bg-soft2 border-2 border-blue-action flex items-center justify-center gap-1 transition-transform duration-300 ease-out`}
         >
           <span className="bg-white border border-blue-action/40 rounded-md px-2 py-0.5 text-sm font-semibold font-mono text-blue-action">
             2x
@@ -126,10 +129,14 @@ export default function Balanza({
         </div>
 
         {/* Hilo Derecho */}
-        <div className="absolute right-[70px] top-[15px] w-[1.5px] h-[34px] bg-slate-500" />
+        <div
+          style={{ transform: `translateY(${isDragging ? 12 : 0}px)` }}
+          className="absolute right-[70px] top-[15px] w-[1.5px] h-[34px] bg-slate-500 transition-transform duration-300 ease-out"
+        />
         {/* Platillo Derecho */}
         <div
-          className={`absolute right-[15px] top-[48px] w-[112px] h-[44px] rounded-b-2xl bg-[#DDF0E5] border-2 border-green-logro flex items-center justify-center transition-all duration-500`}
+          style={{ transform: `translateY(${isDragging ? 12 : 0}px)` }}
+          className={`absolute right-[15px] top-[48px] w-[112px] h-[44px] rounded-b-2xl bg-[#DDF0E5] border-2 border-green-logro flex items-center justify-center transition-transform duration-300 ease-out`}
         >
           <span className="bg-white border border-green-logro/40 rounded-md px-3 py-0.5 text-sm font-semibold font-mono text-green-logro">
             {ladoDerecho}

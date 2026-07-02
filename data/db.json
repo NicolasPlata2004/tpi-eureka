@@ -6,8 +6,8 @@
       "name": "Valentina",
       "role": "student",
       "avatar": "avatar_val.png",
-      "racha": 12,
-      "rachaLastUpdated": "2026-06-30T10:00:00Z"
+      "racha": 13,
+      "rachaLastUpdated": "2026-07-02T13:01:51.615Z"
     },
     {
       "id": "carlos-456",
@@ -23,10 +23,26 @@
       "nombre": "Números enteros y racionales",
       "estado": "completa",
       "habilidades": [
-        { "id": "h1-1", "nombre": "Operaciones básicas", "completa": true },
-        { "id": "h1-2", "nombre": "Fraccionarios y decimales", "completa": true },
-        { "id": "h1-3", "nombre": "Propiedades de los números", "completa": true },
-        { "id": "h1-4", "nombre": "Recta numérica", "completa": true }
+        {
+          "id": "h1-1",
+          "nombre": "Operaciones básicas",
+          "completa": true
+        },
+        {
+          "id": "h1-2",
+          "nombre": "Fraccionarios y decimales",
+          "completa": true
+        },
+        {
+          "id": "h1-3",
+          "nombre": "Propiedades de los números",
+          "completa": true
+        },
+        {
+          "id": "h1-4",
+          "nombre": "Recta numérica",
+          "completa": true
+        }
       ]
     },
     {
@@ -35,11 +51,33 @@
       "estado": "en-progreso",
       "progreso": 40,
       "habilidades": [
-        { "id": "h2-1", "nombre": "Términos y coeficientes", "completa": true },
-        { "id": "h2-2", "nombre": "Traducir enunciados", "completa": true },
-        { "id": "h2-3", "nombre": "Reducir términos semejantes", "completa": false, "activa": true, "leccionId": "lec-semejantes" },
-        { "id": "h2-4", "nombre": "Valor numérico", "completa": false },
-        { "id": "h2-5", "nombre": "Propiedad distributiva", "completa": false }
+        {
+          "id": "h2-1",
+          "nombre": "Términos y coeficientes",
+          "completa": true
+        },
+        {
+          "id": "h2-2",
+          "nombre": "Traducir enunciados",
+          "completa": true
+        },
+        {
+          "id": "h2-3",
+          "nombre": "Reducir términos semejantes",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-semejantes"
+        },
+        {
+          "id": "h2-4",
+          "nombre": "Valor numérico",
+          "completa": false
+        },
+        {
+          "id": "h2-5",
+          "nombre": "Propiedad distributiva",
+          "completa": false
+        }
       ]
     },
     {
@@ -48,12 +86,38 @@
       "estado": "iniciada",
       "progreso": 16,
       "habilidades": [
-        { "id": "h3-1", "nombre": "Ecuaciones de un paso", "completa": true },
-        { "id": "h3-2", "nombre": "La balanza: resolver 2x + 3 = 11", "completa": false, "activa": true, "leccionId": "lec-balanza" },
-        { "id": "h3-3", "nombre": "Ecuaciones con paréntesis", "completa": false },
-        { "id": "h3-4", "nombre": "Variables en ambos lados", "completa": false },
-        { "id": "h3-5", "nombre": "Problemas de aplicación", "completa": false },
-        { "id": "h3-6", "nombre": "Sistemas 2x2 intro", "completa": false }
+        {
+          "id": "h3-1",
+          "nombre": "Ecuaciones de un paso",
+          "completa": true
+        },
+        {
+          "id": "h3-2",
+          "nombre": "La balanza: resolver 2x + 3 = 11",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-balanza"
+        },
+        {
+          "id": "h3-3",
+          "nombre": "Ecuaciones con paréntesis",
+          "completa": false
+        },
+        {
+          "id": "h3-4",
+          "nombre": "Variables en ambos lados",
+          "completa": false
+        },
+        {
+          "id": "h3-5",
+          "nombre": "Problemas de aplicación",
+          "completa": false
+        },
+        {
+          "id": "h3-6",
+          "nombre": "Sistemas 2x2 intro",
+          "completa": false
+        }
       ]
     },
     {
@@ -62,10 +126,26 @@
       "estado": "bloqueada",
       "progreso": 0,
       "habilidades": [
-        { "id": "h4-1", "nombre": "Factor común", "completa": false },
-        { "id": "h4-2", "nombre": "Diferencia de cuadrados", "completa": false },
-        { "id": "h4-3", "nombre": "Trinomio cuadrado perfecto", "completa": false },
-        { "id": "h4-4", "nombre": "Trinomios de la forma x^2+bx+c", "completa": false }
+        {
+          "id": "h4-1",
+          "nombre": "Factor común",
+          "completa": false
+        },
+        {
+          "id": "h4-2",
+          "nombre": "Diferencia de cuadrados",
+          "completa": false
+        },
+        {
+          "id": "h4-3",
+          "nombre": "Trinomio cuadrado perfecto",
+          "completa": false
+        },
+        {
+          "id": "h4-4",
+          "nombre": "Trinomios de la forma x^2+bx+c",
+          "completa": false
+        }
       ]
     }
   ],
@@ -106,10 +186,22 @@
         "tipo": "balanza",
         "pregunta": "¿Cuál es el primer paso para despejar x?",
         "ecuacionOriginal": "2x + 3 = 11",
-        "platilloIzquierdo": { "terminos": ["2x", "+3"], "mostrarTres": true },
-        "platilloDerecho": { "valor": 11 },
+        "platilloIzquierdo": {
+          "terminos": [
+            "2x",
+            "+3"
+          ],
+          "mostrarTres": true
+        },
+        "platilloDerecho": {
+          "valor": 11
+        },
         "opciones": [
-          { "id": "a", "texto": "Restar 3 en ambos lados", "ok": true },
+          {
+            "id": "a",
+            "texto": "Restar 3 en ambos lados",
+            "ok": true
+          },
           {
             "id": "b",
             "texto": "Dividir todo entre 2",
@@ -154,6 +246,15 @@
       "intentos": 1,
       "createdAt": "2026-06-25T11:00:00Z",
       "updatedAt": "2026-06-25T11:00:00Z"
+    },
+    {
+      "id": "pr-1782997311615",
+      "userId": "val-123",
+      "habilidadId": "h3-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-07-02T13:01:51.615Z",
+      "updatedAt": "2026-07-02T13:01:51.615Z"
     }
   ],
   "attempts": [
@@ -166,6 +267,16 @@
       "intentos": 3,
       "createdAt": "2026-06-28T16:00:00Z",
       "updatedAt": "2026-06-28T16:05:00Z"
+    },
+    {
+      "id": "att-1782997311615",
+      "userId": "val-123",
+      "habilidadId": "h3-2",
+      "retoId": "reto-balanza-1",
+      "passed": true,
+      "intentos": 1,
+      "createdAt": "2026-07-02T13:01:51.615Z",
+      "updatedAt": "2026-07-02T13:01:51.615Z"
     }
   ],
   "logros": [
@@ -198,31 +309,127 @@
     "challengesCompleted": 142,
     "supportNeededCount": 5,
     "dificultades": [
-      { "tema": "Propiedad distributiva", "intentosMasDeDos": 64, "color": "amber" },
-      { "tema": "Términos semejantes", "intentosMasDeDos": 51, "color": "amber" },
-      { "tema": "Signos en enteros", "intentosMasDeDos": 38, "color": "blue" },
-      { "tema": "Traducir enunciados", "intentosMasDeDos": 29, "color": "blue" },
-      { "tema": "Ecuaciones de un paso", "intentosMasDeDos": 18, "color": "green" }
+      {
+        "tema": "Propiedad distributiva",
+        "intentosMasDeDos": 64,
+        "color": "amber"
+      },
+      {
+        "tema": "Términos semejantes",
+        "intentosMasDeDos": 51,
+        "color": "amber"
+      },
+      {
+        "tema": "Signos en enteros",
+        "intentosMasDeDos": 38,
+        "color": "blue"
+      },
+      {
+        "tema": "Traducir enunciados",
+        "intentosMasDeDos": 29,
+        "color": "blue"
+      },
+      {
+        "tema": "Ecuaciones de un paso",
+        "intentosMasDeDos": 18,
+        "color": "green"
+      }
     ],
     "unidadesAvance": [
-      { "nombre": "Enteros y racionales", "dominio": 91, "tendencia": "▲ sube" },
-      { "nombre": "Expresiones algebraicas", "dominio": 63, "tendencia": "▲ sube" },
-      { "nombre": "Ecuaciones lineales", "dominio": 41, "tendencia": "△ atención" },
-      { "nombre": "Factorización", "dominio": 0, "tendencia": "no iniciada" }
+      {
+        "nombre": "Enteros y racionales",
+        "dominio": 91,
+        "tendencia": "▲ sube"
+      },
+      {
+        "nombre": "Expresiones algebraicas",
+        "dominio": 63,
+        "tendencia": "▲ sube"
+      },
+      {
+        "nombre": "Ecuaciones lineales",
+        "dominio": 41,
+        "tendencia": "△ atención"
+      },
+      {
+        "nombre": "Factorización",
+        "dominio": 0,
+        "tendencia": "no iniciada"
+      }
     ],
     "estudiantesApoyo": [
-      { "name": "Estudiante A", "habilidad": "Propiedad distributiva", "intentos": 5 },
-      { "name": "Estudiante B", "habilidad": "Términos semejantes", "intentos": 4 },
-      { "name": "Estudiante C", "habilidad": "Propiedad distributiva", "intentos": 4 },
-      { "name": "Estudiante D", "habilidad": "Signos en enteros", "intentos": 3 },
-      { "name": "Estudiante E", "habilidad": "Términos semejantes", "intentos": 3 }
+      {
+        "name": "Estudiante A",
+        "habilidad": "Propiedad distributiva",
+        "intentos": 5
+      },
+      {
+        "name": "Estudiante B",
+        "habilidad": "Términos semejantes",
+        "intentos": 4
+      },
+      {
+        "name": "Estudiante C",
+        "habilidad": "Propiedad distributiva",
+        "intentos": 4
+      },
+      {
+        "name": "Estudiante D",
+        "habilidad": "Signos en enteros",
+        "intentos": 3
+      },
+      {
+        "name": "Estudiante E",
+        "habilidad": "Términos semejantes",
+        "intentos": 3
+      }
     ],
     "estudiantesAvance": [
-      { "id": "est-1", "nombre": "Valentina", "email": "val@eureka.edu.co", "progresoU1": "100%", "progresoU2": "40%", "progresoU3": "16%", "racha": 12 },
-      { "id": "est-2", "nombre": "Santiago", "email": "santiago@eureka.edu.co", "progresoU1": "100%", "progresoU2": "60%", "progresoU3": "0%", "racha": 5 },
-      { "id": "est-3", "nombre": "Camila", "email": "camila@eureka.edu.co", "progresoU1": "85%", "progresoU2": "20%", "progresoU3": "0%", "racha": 2 },
-      { "id": "est-4", "nombre": "Mateo", "email": "mateo@eureka.edu.co", "progresoU1": "100%", "progresoU2": "40%", "progresoU3": "32%", "racha": 15 },
-      { "id": "est-5", "nombre": "Sofía", "email": "sofia@eureka.edu.co", "progresoU1": "90%", "progresoU2": "20%", "progresoU3": "16%", "racha": 0 }
+      {
+        "id": "est-1",
+        "nombre": "Valentina",
+        "email": "val@eureka.edu.co",
+        "progresoU1": "100%",
+        "progresoU2": "40%",
+        "progresoU3": "16%",
+        "racha": 12
+      },
+      {
+        "id": "est-2",
+        "nombre": "Santiago",
+        "email": "santiago@eureka.edu.co",
+        "progresoU1": "100%",
+        "progresoU2": "60%",
+        "progresoU3": "0%",
+        "racha": 5
+      },
+      {
+        "id": "est-3",
+        "nombre": "Camila",
+        "email": "camila@eureka.edu.co",
+        "progresoU1": "85%",
+        "progresoU2": "20%",
+        "progresoU3": "0%",
+        "racha": 2
+      },
+      {
+        "id": "est-4",
+        "nombre": "Mateo",
+        "email": "mateo@eureka.edu.co",
+        "progresoU1": "100%",
+        "progresoU2": "40%",
+        "progresoU3": "32%",
+        "racha": 15
+      },
+      {
+        "id": "est-5",
+        "nombre": "Sofía",
+        "email": "sofia@eureka.edu.co",
+        "progresoU1": "90%",
+        "progresoU2": "20%",
+        "progresoU3": "16%",
+        "racha": 0
+      }
     ]
   }
 }
