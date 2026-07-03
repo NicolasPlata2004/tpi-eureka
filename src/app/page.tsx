@@ -4,6 +4,58 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 
+const testimonials = [
+  {
+    quote: "Antes odiaba el álgebra porque siempre sentía que si cometía un error era mala en matemáticas. En Eureka arrastro las fichas y la balanza me muestra qué hice mal sin decirme incorrecto. Se siente como un juego.",
+    name: "Valentina M.",
+    role: "Estudiante de 8° grado, Boyacá",
+    initial: "V",
+    color: "bg-blue-action/10 text-blue-action"
+  },
+  {
+    quote: "Eureka me permite ver en tiempo real qué conceptos le están costando más a mis estudiantes sin exponer sus nombres. Descubrí que el 64% fallaba en la propiedad distributiva y pudimos repasarlo juntos en clase.",
+    name: "Profesor Carlos R.",
+    role: "Docente de Matemáticas, Cundinamarca",
+    initial: "C",
+    color: "bg-green-logro/10 text-green-logro"
+  },
+  {
+    quote: "Al principio, mis estudiantes de Caldas le tenían pánico a las evaluaciones de álgebra. Con Eureka, ven los retos como acertijos de balanzas. La racha de días los tiene súper motivados y compiten por ver quién mantiene su racha más activa.",
+    name: "Profesora Diana M.",
+    role: "Docente de 8° grado, Caldas",
+    initial: "D",
+    color: "bg-amber-revisar/10 text-amber-revisar"
+  },
+  {
+    quote: "Me gusta porque no me dice 'incorrecto' con una equis roja gigante. Si me equivoco en la balanza, me sale un color ámbar y me ayuda a pensar en qué parte del despeje me equivoqué. He aprendido más de mis errores que antes.",
+    name: "Santiago G.",
+    role: "Estudiante de 8° grado, Boyacá",
+    initial: "S",
+    color: "bg-blue-action/10 text-blue-action"
+  },
+  {
+    quote: "La transición de la aritmética al álgebra siempre ha sido el talón de Aquiles de la secundaria. Eureka aborda este reto de forma puramente visual. La física del arrastre y el equilibrio de ecuaciones ayuda a que los chicos interioricen la igualdad matemática.",
+    name: "Héctor F.",
+    role: "Coordinador Académico, Antioquia",
+    initial: "H",
+    color: "bg-purple-500/10 text-purple-600"
+  },
+  {
+    quote: "En mi vereda el internet molesta mucho, pero Eureka carga rapidísimo y funciona sin trabarse. Me encanta completar los retos de la balanza para ganar los logros de Equilibrista. ¡Ya llevo 15 retos seguidos!",
+    name: "Camila T.",
+    role: "Estudiante de 8° grado, Santander",
+    initial: "C",
+    color: "bg-green-logro/10 text-green-logro"
+  },
+  {
+    quote: "Ver a mis hijos hacer tareas de matemáticas sin llorar ni estresarse es un alivio. Eureka convirtió el drama de las tareas en un momento divertido. Mi hija Sofía ahora me explica cómo equilibra las ecuaciones en la balanza.",
+    name: "Patricia L.",
+    role: "Madre de familia, Cundinamarca",
+    initial: "P",
+    color: "bg-amber-revisar/10 text-amber-revisar"
+  }
+];
+
 export default function Home() {
   const router = useRouter();
   const [isPlaying, setIsPlaying] = useState(false);
@@ -149,40 +201,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Sección Testimonios */}
-      <section className="py-16 bg-bg-soft1 border-t border-b border-tinta/5">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8">
-          
-          <div className="bg-white p-6 rounded-2xl border border-tinta/5 flex flex-col justify-between gap-6 shadow-sm">
-            <p className="text-sm text-slate-600 italic leading-relaxed">
-              &quot;Antes odiaba el álgebra porque siempre sentía que si cometía un error era mala en matemáticas. En Eureka arrastro las fichas y la balanza me muestra qué hice mal sin decirme incorrecto. Se siente como un juego.&quot;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-blue-action/10 text-blue-action flex items-center justify-center font-bold text-sm">
-                V
+      {/* Sección Testimonios (Carrusel Infinito de Marquee) */}
+      <section className="py-16 bg-bg-soft1 border-t border-b border-tinta/5 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 mb-10 text-center">
+          <h2 className="text-2xl font-bold text-tinta tracking-tight">Lo que dice nuestra comunidad</h2>
+          <p className="text-xs text-slate-500 mt-1">Descubre la experiencia de estudiantes, docentes y padres con Eureka</p>
+        </div>
+        
+        {/* Contenedor del Carrusel con bordes degradados para efecto premium */}
+        <div className="relative w-full overflow-hidden before:absolute before:left-0 before:top-0 before:bottom-0 before:w-16 before:bg-gradient-to-r before:from-bg-soft1 before:to-transparent before:z-10 after:absolute after:right-0 after:top-0 after:bottom-0 after:w-16 after:bg-gradient-to-l after:from-bg-soft1 after:to-transparent after:z-10">
+          <div className="flex gap-6 animate-marquee w-max py-2 select-none">
+            {/* Duplicamos los testimonios para lograr un loop infinito perfecto */}
+            {[...testimonials, ...testimonials].map((t, idx) => (
+              <div 
+                key={idx} 
+                className="w-[300px] sm:w-[350px] flex-shrink-0 bg-white p-6 rounded-2xl border border-tinta/5 flex flex-col justify-between gap-6 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+              >
+                <p className="text-xs sm:text-sm text-slate-600 italic leading-relaxed">
+                  &quot;{t.quote}&quot;
+                </p>
+                <div className="flex items-center gap-3">
+                  <div className={`w-9 h-9 rounded-full ${t.color} flex items-center justify-center font-bold text-xs sm:text-sm`}>
+                    {t.initial}
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold text-tinta">{t.name}</p>
+                    <p className="text-[10px] text-slate-400">{t.role}</p>
+                  </div>
+                </div>
               </div>
-              <div>
-                <p className="text-xs font-bold text-tinta">Valentina M.</p>
-                <p className="text-[10px] text-slate-400">Estudiante de 8° grado, Boyacá</p>
-              </div>
-            </div>
+            ))}
           </div>
-
-          <div className="bg-white p-6 rounded-2xl border border-tinta/5 flex flex-col justify-between gap-6 shadow-sm">
-            <p className="text-sm text-slate-600 italic leading-relaxed">
-              &quot;Eureka me permite ver en tiempo real qué conceptos le están costando más a mis estudiantes sin exponer sus nombres. Descubrí que el 64% fallaba en la propiedad distributiva y pudimos repasarlo juntos en clase.&quot;
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-green-logro/10 text-green-logro flex items-center justify-center font-bold text-sm">
-                C
-              </div>
-              <div>
-                <p className="text-xs font-bold text-tinta">Profesor Carlos R.</p>
-                <p className="text-[10px] text-slate-400">Docente de Matemáticas, Cundinamarca</p>
-              </div>
-            </div>
-          </div>
-
         </div>
       </section>
 
