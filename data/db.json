@@ -1,0 +1,744 @@
+{
+  "users": [
+    {
+      "id": "val-123",
+      "email": "val@eureka.edu.co",
+      "name": "Valentina",
+      "role": "student",
+      "avatar": "avatar_val.png",
+      "racha": 13,
+      "rachaLastUpdated": "2026-07-02T13:01:51.615Z"
+    },
+    {
+      "id": "santiago-123",
+      "email": "santiago@eureka.edu.co",
+      "name": "Santiago",
+      "role": "student",
+      "avatar": "avatar_val.png",
+      "racha": 5,
+      "rachaLastUpdated": "2026-07-02T11:00:00.000Z"
+    },
+    {
+      "id": "camila-123",
+      "email": "camila@eureka.edu.co",
+      "name": "Camila",
+      "role": "student",
+      "avatar": "avatar_val.png",
+      "racha": 2,
+      "rachaLastUpdated": "2026-07-02T10:00:00.000Z"
+    },
+    {
+      "id": "mateo-123",
+      "email": "mateo@eureka.edu.co",
+      "name": "Mateo",
+      "role": "student",
+      "avatar": "avatar_val.png",
+      "racha": 15,
+      "rachaLastUpdated": "2026-07-02T12:00:00.000Z"
+    },
+    {
+      "id": "sofia-123",
+      "email": "sofia@eureka.edu.co",
+      "name": "Sofía",
+      "role": "student",
+      "avatar": "avatar_val.png",
+      "racha": 0,
+      "rachaLastUpdated": ""
+    },
+    {
+      "id": "carlos-456",
+      "email": "carlos@eureka.edu.co",
+      "name": "Profesor Carlos",
+      "role": "teacher",
+      "avatar": "teacher_carlos.png"
+    }
+  ],
+  "units": [
+    {
+      "id": "u1",
+      "nombre": "Números enteros y racionales",
+      "estado": "completa",
+      "habilidades": [
+        {
+          "id": "h1-1",
+          "nombre": "Operaciones básicas",
+          "completa": true
+        },
+        {
+          "id": "h1-2",
+          "nombre": "Fraccionarios y decimales",
+          "completa": true
+        },
+        {
+          "id": "h1-3",
+          "nombre": "Propiedades de los números",
+          "completa": true
+        },
+        {
+          "id": "h1-4",
+          "nombre": "Recta numérica",
+          "completa": true
+        }
+      ]
+    },
+    {
+      "id": "u2",
+      "nombre": "Expresiones algebraicas",
+      "estado": "en-progreso",
+      "progreso": 40,
+      "habilidades": [
+        {
+          "id": "h2-1",
+          "nombre": "Términos y coeficientes",
+          "completa": true
+        },
+        {
+          "id": "h2-2",
+          "nombre": "Traducir enunciados",
+          "completa": true
+        },
+        {
+          "id": "h2-3",
+          "nombre": "Reducir términos semejantes",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-semejantes"
+        },
+        {
+          "id": "h2-4",
+          "nombre": "Valor numérico",
+          "completa": false
+        },
+        {
+          "id": "h2-5",
+          "nombre": "Propiedad distributiva",
+          "completa": false
+        }
+      ]
+    },
+    {
+      "id": "u3",
+      "nombre": "Ecuaciones lineales",
+      "estado": "iniciada",
+      "progreso": 16,
+      "habilidades": [
+        {
+          "id": "h3-1",
+          "nombre": "Ecuaciones de un paso",
+          "completa": true
+        },
+        {
+          "id": "h3-2",
+          "nombre": "La balanza: resolver 2x + 3 = 11",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-balanza"
+        },
+        {
+          "id": "h3-3",
+          "nombre": "Ecuaciones con paréntesis",
+          "completa": false
+        },
+        {
+          "id": "h3-4",
+          "nombre": "Variables en ambos lados",
+          "completa": false
+        },
+        {
+          "id": "h3-5",
+          "nombre": "Problemas de aplicación",
+          "completa": false
+        },
+        {
+          "id": "h3-6",
+          "nombre": "Sistemas 2x2 intro",
+          "completa": false
+        }
+      ]
+    },
+    {
+      "id": "u4",
+      "nombre": "Factorización",
+      "estado": "bloqueada",
+      "progreso": 0,
+      "habilidades": [
+        {
+          "id": "h4-1",
+          "nombre": "Factor común",
+          "completa": false
+        },
+        {
+          "id": "h4-2",
+          "nombre": "Diferencia de cuadrados",
+          "completa": false
+        },
+        {
+          "id": "h4-3",
+          "nombre": "Trinomio cuadrado perfecto",
+          "completa": false
+        },
+        {
+          "id": "h4-4",
+          "nombre": "Trinomios de la forma x^2+bx+c",
+          "completa": false
+        }
+      ]
+    }
+  ],
+  "lecciones": {
+    "lec-semejantes": {
+      "id": "lec-semejantes",
+      "titulo": "Reducir términos semejantes",
+      "unidadId": "u2",
+      "videoUrl": "/manim/semejantes.mp4",
+      "duracion": "04:15",
+      "ideasClave": [
+        "Solo puedes juntar términos que tengan las mismas letras con los mismos exponentes.",
+        "Los coeficientes se suman o restan según sus signos.",
+        "Las manzanas con manzanas y las peras con peras: 3a + 2a = 5a, pero 3a + 2b no se puede simplificar."
+      ],
+      "concepto": "Términos Semejantes",
+      "conceptoDetalle": "Son aquellos términos que tienen la misma parte literal (mismas variables elevadas a los mismos exponentes). Por ejemplo, 5x y -3x son semejantes, pero 5x y 5x² no lo son."
+    },
+    "lec-balanza": {
+      "id": "lec-balanza",
+      "titulo": "La balanza: resolver 2x + 3 = 11",
+      "unidadId": "u3",
+      "videoUrl": "/manim/balanza.mp4",
+      "duracion": "05:40",
+      "ideasClave": [
+        "Una ecuación es una balanza: los dos lados pesan lo mismo.",
+        "Lo que hagas en un lado, hazlo también en el otro.",
+        "Para deshacer una suma, resta. Para deshacer una multiplicación, divide."
+      ],
+      "concepto": "Mantener la igualdad",
+      "conceptoDetalle": "Si a los dos lados les quitas lo mismo, la balanza sigue equilibrada: 2x + 3 - 3 = 11 - 3. Al final obtienes una ecuación más simple."
+    }
+  },
+  "retos": {
+    "lec-balanza": [
+      {
+        "id": "reto-balanza-1",
+        "tipo": "balanza",
+        "pregunta": "¿Cuál es el primer paso para despejar x?",
+        "ecuacionOriginal": "2x + 3 = 11",
+        "platilloIzquierdo": {
+          "terminos": [
+            "2x",
+            "+3"
+          ],
+          "mostrarTres": true
+        },
+        "platilloDerecho": {
+          "valor": 11
+        },
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "Restar 3 en ambos lados",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "Dividir todo entre 2",
+            "ok": false,
+            "reflexion": "Buena idea para más adelante, pero el 3 sigue sumando en el lado izquierdo. Si divides ahora, también tendrías que dividir el +3. ¿Qué operación deshace una suma?"
+          },
+          {
+            "id": "c",
+            "texto": "Sumar 3 en ambos lados",
+            "ok": false,
+            "reflexion": "Fíjate en el platillo izquierdo: el 3 ya está sumando. Si sumas otro 3, ¿la x queda más sola o más acompañada? ¿Qué operación deshace una suma?"
+          }
+        ],
+        "pista": "Piensa al revés: la x está multiplicada por 2 y luego le sumaron 3. Para despejarla, deshaz primero lo último que le hicieron."
+      }
+    ]
+  },
+  "progressRecords": [
+    {
+      "id": "pr-val-123-h1-1",
+      "userId": "val-123",
+      "habilidadId": "h1-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-val-123-h1-2",
+      "userId": "val-123",
+      "habilidadId": "h1-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-val-123-h1-3",
+      "userId": "val-123",
+      "habilidadId": "h1-3",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-val-123-h1-4",
+      "userId": "val-123",
+      "habilidadId": "h1-4",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-santiago-123-h1-1",
+      "userId": "santiago-123",
+      "habilidadId": "h1-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-santiago-123-h1-2",
+      "userId": "santiago-123",
+      "habilidadId": "h1-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-santiago-123-h1-3",
+      "userId": "santiago-123",
+      "habilidadId": "h1-3",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-santiago-123-h1-4",
+      "userId": "santiago-123",
+      "habilidadId": "h1-4",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-mateo-123-h1-1",
+      "userId": "mateo-123",
+      "habilidadId": "h1-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-mateo-123-h1-2",
+      "userId": "mateo-123",
+      "habilidadId": "h1-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-mateo-123-h1-3",
+      "userId": "mateo-123",
+      "habilidadId": "h1-3",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-mateo-123-h1-4",
+      "userId": "mateo-123",
+      "habilidadId": "h1-4",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-camila-123-h1-1",
+      "userId": "camila-123",
+      "habilidadId": "h1-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-camila-123-h1-2",
+      "userId": "camila-123",
+      "habilidadId": "h1-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-camila-123-h1-3",
+      "userId": "camila-123",
+      "habilidadId": "h1-3",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-sofia-123-h1-1",
+      "userId": "sofia-123",
+      "habilidadId": "h1-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-sofia-123-h1-2",
+      "userId": "sofia-123",
+      "habilidadId": "h1-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-sofia-123-h1-3",
+      "userId": "sofia-123",
+      "habilidadId": "h1-3",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-15T10:00:00Z",
+      "updatedAt": "2026-06-15T10:00:00Z"
+    },
+    {
+      "id": "pr-val-h2-1",
+      "userId": "val-123",
+      "habilidadId": "h2-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-val-h2-2",
+      "userId": "val-123",
+      "habilidadId": "h2-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-mateo-h2-1",
+      "userId": "mateo-123",
+      "habilidadId": "h2-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-mateo-h2-2",
+      "userId": "mateo-123",
+      "habilidadId": "h2-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-santiago-h2-1",
+      "userId": "santiago-123",
+      "habilidadId": "h2-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-santiago-h2-2",
+      "userId": "santiago-123",
+      "habilidadId": "h2-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-santiago-h2-3",
+      "userId": "santiago-123",
+      "habilidadId": "h2-3",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-camila-h2-1",
+      "userId": "camila-123",
+      "habilidadId": "h2-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-sofia-h2-1",
+      "userId": "sofia-123",
+      "habilidadId": "h2-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-20T10:00:00Z",
+      "updatedAt": "2026-06-20T10:00:00Z"
+    },
+    {
+      "id": "pr-val-h3-1",
+      "userId": "val-123",
+      "habilidadId": "h3-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-25T10:00:00Z",
+      "updatedAt": "2026-06-25T10:00:00Z"
+    },
+    {
+      "id": "pr-sofia-h3-1",
+      "userId": "sofia-123",
+      "habilidadId": "h3-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-25T10:00:00Z",
+      "updatedAt": "2026-06-25T10:00:00Z"
+    },
+    {
+      "id": "pr-mateo-h3-1",
+      "userId": "mateo-123",
+      "habilidadId": "h3-1",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-25T10:00:00Z",
+      "updatedAt": "2026-06-25T10:00:00Z"
+    },
+    {
+      "id": "pr-mateo-h3-2",
+      "userId": "mateo-123",
+      "habilidadId": "h3-2",
+      "completa": true,
+      "intentos": 1,
+      "createdAt": "2026-06-25T10:00:00Z",
+      "updatedAt": "2026-06-25T10:00:00Z"
+    }
+  ],
+  "attempts": [
+    {
+      "id": "att-santiago-dist",
+      "userId": "santiago-123",
+      "habilidadId": "h2-5",
+      "retoId": "reto-distributiva-1",
+      "passed": false,
+      "intentos": 5,
+      "createdAt": "2026-06-27T10:00:00Z",
+      "updatedAt": "2026-06-27T10:10:00Z"
+    },
+    {
+      "id": "att-camila-semejantes",
+      "userId": "camila-123",
+      "habilidadId": "h2-3",
+      "retoId": "reto-semejantes-1",
+      "passed": false,
+      "intentos": 4,
+      "createdAt": "2026-06-27T10:00:00Z",
+      "updatedAt": "2026-06-27T10:10:00Z"
+    },
+    {
+      "id": "att-sofia-dist",
+      "userId": "sofia-123",
+      "habilidadId": "h2-5",
+      "retoId": "reto-distributiva-1",
+      "passed": false,
+      "intentos": 4,
+      "createdAt": "2026-06-27T10:00:00Z",
+      "updatedAt": "2026-06-27T10:10:00Z"
+    },
+    {
+      "id": "att-mateo-basicas",
+      "userId": "mateo-123",
+      "habilidadId": "h1-1",
+      "retoId": "reto-basicas-1",
+      "passed": true,
+      "intentos": 3,
+      "createdAt": "2026-06-15T09:00:00Z",
+      "updatedAt": "2026-06-15T09:10:00Z"
+    },
+    {
+      "id": "att-santiago-semejantes",
+      "userId": "santiago-123",
+      "habilidadId": "h2-3",
+      "retoId": "reto-semejantes-1",
+      "passed": true,
+      "intentos": 3,
+      "createdAt": "2026-06-20T09:00:00Z",
+      "updatedAt": "2026-06-20T09:15:00Z"
+    }
+  ],
+  "logros": [
+    {
+      "id": "logro-1",
+      "userId": "val-123",
+      "tipo": "equilibrista",
+      "titulo": "Equilibrista",
+      "descripcion": "10 balanzas resueltas",
+      "icono": "◆",
+      "color": "green",
+      "unlockedAt": "2026-06-24T18:00:00Z"
+    },
+    {
+      "id": "logro-2",
+      "userId": "val-123",
+      "tipo": "detective",
+      "titulo": "Detective del error",
+      "descripcion": "Encontraste tu error 5 veces sin pista",
+      "icono": "●",
+      "color": "blue",
+      "unlockedAt": "2026-06-26T17:15:00Z"
+    }
+  ],
+  "docenteAnalytics": {
+    "masteryAverage": 68,
+    "masteryDiff": 6,
+    "activeCount": 27,
+    "activeDiff": 3,
+    "challengesCompleted": 142,
+    "supportNeededCount": 5,
+    "dificultades": [
+      {
+        "tema": "Propiedad distributiva",
+        "intentosMasDeDos": 64,
+        "color": "amber"
+      },
+      {
+        "tema": "Términos semejantes",
+        "intentosMasDeDos": 51,
+        "color": "amber"
+      },
+      {
+        "tema": "Signos en enteros",
+        "intentosMasDeDos": 38,
+        "color": "blue"
+      },
+      {
+        "tema": "Traducir enunciados",
+        "intentosMasDeDos": 29,
+        "color": "blue"
+      },
+      {
+        "tema": "Ecuaciones de un paso",
+        "intentosMasDeDos": 18,
+        "color": "green"
+      }
+    ],
+    "unidadesAvance": [
+      {
+        "nombre": "Enteros y racionales",
+        "dominio": 91,
+        "tendencia": "▲ sube"
+      },
+      {
+        "nombre": "Expresiones algebraicas",
+        "dominio": 63,
+        "tendencia": "▲ sube"
+      },
+      {
+        "nombre": "Ecuaciones lineales",
+        "dominio": 41,
+        "tendencia": "△ atención"
+      },
+      {
+        "nombre": "Factorización",
+        "dominio": 0,
+        "tendencia": "no iniciada"
+      }
+    ],
+    "estudiantesApoyo": [
+      {
+        "name": "Estudiante A",
+        "habilidad": "Propiedad distributiva",
+        "intentos": 5
+      },
+      {
+        "name": "Estudiante B",
+        "habilidad": "Términos semejantes",
+        "intentos": 4
+      },
+      {
+        "name": "Estudiante C",
+        "habilidad": "Propiedad distributiva",
+        "intentos": 4
+      },
+      {
+        "name": "Estudiante D",
+        "habilidad": "Signos en enteros",
+        "intentos": 3
+      },
+      {
+        "name": "Estudiante E",
+        "habilidad": "Términos semejantes",
+        "intentos": 3
+      }
+    ],
+    "estudiantesAvance": [
+      {
+        "id": "est-1",
+        "nombre": "Valentina",
+        "email": "val@eureka.edu.co",
+        "progresoU1": "100%",
+        "progresoU2": "40%",
+        "progresoU3": "16%",
+        "racha": 12
+      },
+      {
+        "id": "est-2",
+        "nombre": "Santiago",
+        "email": "santiago@eureka.edu.co",
+        "progresoU1": "100%",
+        "progresoU2": "60%",
+        "progresoU3": "0%",
+        "racha": 5
+      },
+      {
+        "id": "est-3",
+        "nombre": "Camila",
+        "email": "camila@eureka.edu.co",
+        "progresoU1": "85%",
+        "progresoU2": "20%",
+        "progresoU3": "0%",
+        "racha": 2
+      },
+      {
+        "id": "est-4",
+        "nombre": "Mateo",
+        "email": "mateo@eureka.edu.co",
+        "progresoU1": "100%",
+        "progresoU2": "40%",
+        "progresoU3": "32%",
+        "racha": 15
+      },
+      {
+        "id": "est-5",
+        "nombre": "Sofía",
+        "email": "sofia@eureka.edu.co",
+        "progresoU1": "90%",
+        "progresoU2": "20%",
+        "progresoU3": "16%",
+        "racha": 0
+      }
+    ]
+  }
+}
