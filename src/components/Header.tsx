@@ -38,8 +38,7 @@ export default function Header() {
     try {
       const res = await fetch('/api/auth/logout', { method: 'POST' });
       if (res.ok) {
-        router.push('/');
-        router.refresh();
+        window.location.href = '/';
       }
     } catch (err) {
       console.error('Error cerrando sesión:', err);

@@ -77,8 +77,8 @@ export default function DevLogin() {
       });
       if (res.ok) {
         const data = await res.json();
-        router.push(data.user.role === 'student' ? '/dashboard' : '/teacher');
-        router.refresh();
+        // Usamos window.location.href para forzar una recarga de página limpia y asegurar que Next.js lea las cookies actualizadas de sesión.
+        window.location.href = data.user.role === 'student' ? '/dashboard' : '/teacher';
       }
     } catch (err) {
       console.error('Error logging in:', err);
@@ -97,8 +97,8 @@ export default function DevLogin() {
       });
       if (res.ok) {
         const data = await res.json();
-        router.push(data.user.role === 'student' ? '/dashboard' : '/teacher');
-        router.refresh();
+        // Usamos window.location.href para forzar una recarga de página limpia y asegurar que Next.js lea las cookies actualizadas de sesión.
+        window.location.href = data.user.role === 'student' ? '/dashboard' : '/teacher';
       }
     } catch (err) {
       console.error('Error creating dev user:', err);
@@ -112,10 +112,10 @@ export default function DevLogin() {
       <Header />
       
       <main className="flex-1 max-w-4xl mx-auto px-6 py-12 flex flex-col justify-center items-center w-full">
-        <div className="w-full grid md:grid-template-columns md:grid-cols-2 gap-10 items-stretch bg-white border border-tinta/10 rounded-2xl shadow-sm overflow-hidden p-8 md:p-10">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch bg-white border border-tinta/10 rounded-2xl shadow-sm p-8 md:p-10">
           
           {/* Lado Izquierdo: Lista de cuentas existentes */}
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-6 md:pr-10 md:border-r md:border-tinta/10">
             <div>
               <h1 className="text-xl font-bold text-tinta">Cuentas de Desarrollo</h1>
               <p className="text-xs text-slate-500 mt-1">
@@ -153,9 +153,6 @@ export default function DevLogin() {
               </div>
             )}
           </div>
-
-          {/* Divisor vertical */}
-          <div className="hidden md:block w-px bg-tinta/10 self-stretch my-2" />
 
           {/* Lado Derecho: Crear nueva cuenta */}
           <div className="flex flex-col gap-6">
