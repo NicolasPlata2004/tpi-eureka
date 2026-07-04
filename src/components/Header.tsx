@@ -14,6 +14,7 @@ export default function Header() {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   useEffect(() => {
     async function checkUser() {
@@ -83,13 +84,28 @@ export default function Header() {
                 {user.role === 'student' ? 'Mi camino' : 'Panel docente'}
               </span>
               
-              <div className="relative group">
-                <button className="w-9 h-9 rounded-full bg-bg-soft2 border border-blue-action/20 text-blue-action flex items-center justify-center font-bold text-sm hover:bg-blue-action hover:text-white transition-all">
+              <div className="relative">
+                <button 
+                  onClick={() => setDropdownOpen(!dropdownOpen)}
+                  className="w-9 h-9 rounded-full bg-bg-soft2 border border-blue-action/20 text-blue-action flex items-center justify-center font-bold text-sm hover:bg-blue-action hover:text-white transition-all cursor-pointer relative z-50"
+                >
                   {user.name.charAt(0).toUpperCase()}
                 </button>
                 
+                {/* Backdrop transparente para cerrar al hacer clic afuera */}
+                {dropdownOpen && (
+                  <div 
+                    onClick={() => setDropdownOpen(false)}
+                    className="fixed inset-0 z-40 bg-transparent cursor-default" 
+                  />
+                )}
+                
                 {/* Dropdown de usuario */}
-                <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-tinta/10 rounded-xl shadow-lg p-2 hidden group-hover:block hover:block">
+                <div 
+                  className={`absolute right-0 top-full mt-2 w-48 bg-white border border-tinta/10 rounded-xl shadow-lg p-2 z-50 transition-all ${
+                    dropdownOpen ? 'block' : 'hidden'
+                  }`}
+                >
                   <div className="px-3 py-2 border-b border-tinta/5">
                     <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">
                       {user.role === 'student' ? 'Estudiante' : 'Docente'}
@@ -97,8 +113,11 @@ export default function Header() {
                     <p className="text-sm font-bold truncate text-tinta">{user.name}</p>
                   </div>
                   <button 
-                    onClick={handleLogout}
-                    className="w-full text-left px-3 py-2 text-sm text-amber-revisar hover:bg-bg-soft1 rounded-lg transition-colors font-medium mt-1"
+                    onClick={(e) => {
+                      setDropdownOpen(false);
+                      handleLogout();
+                    }}
+                    className="w-full text-left px-3 py-2 text-sm text-amber-revisar hover:bg-bg-soft1 rounded-lg transition-colors font-medium mt-1 cursor-pointer"
                   >
                     Cerrar sesión
                   </button>
