@@ -202,22 +202,24 @@ export default function RetoPage({ params }: PageProps) {
 
       <main className="flex-1 max-w-7xl mx-auto px-6 py-8 w-full grid md:grid-cols-12 gap-8 items-start">
         
-        {/* Lado izquierdo: Balanza (7 columnas) */}
-        <div className="md:col-span-7 flex flex-col items-center gap-4 w-full">
-          <Balanza
-            ecuacion={resuelto ? (reto.ecuacionResuelta || '2x = 8') : reto.ecuacionOriginal}
-            mostrarTres={!resuelto}
-            ladoDerecho={resuelto ? (reto.ladoDerechoResuelto || '8') : String(reto.platilloDerecho?.valor)}
-            onCorrectAction={handleCorrectAction}
-            resuelto={resuelto}
-            subtitulo={resuelto ? (reto.subtituloResuelto || '¡Eso es! Quitaste 3 de cada lado de la balanza.') : undefined}
-            fichaValor={reto.fichaValor}
-            terminoIzquierdo={reto.terminoIzquierdo}
-          />
-        </div>
+        {/* Lado izquierdo: Balanza (7 columnas) - Solo se muestra para retos de tipo balanza */}
+        {reto.tipo === 'balanza' && (
+          <div className="md:col-span-7 flex flex-col items-center gap-4 w-full">
+            <Balanza
+              ecuacion={resuelto ? (reto.ecuacionResuelta || '2x = 8') : reto.ecuacionOriginal}
+              mostrarTres={!resuelto}
+              ladoDerecho={resuelto ? (reto.ladoDerechoResuelto || '8') : String(reto.platilloDerecho?.valor)}
+              onCorrectAction={handleCorrectAction}
+              resuelto={resuelto}
+              subtitulo={resuelto ? (reto.subtituloResuelto || '¡Eso es! Quitaste 3 de cada lado de la balanza.') : undefined}
+              fichaValor={reto.fichaValor}
+              terminoIzquierdo={reto.terminoIzquierdo}
+            />
+          </div>
+        )}
 
-        {/* Lado derecho: Pregunta, Opciones y Feedback (5 columnas) */}
-        <div className="md:col-span-5 flex flex-col gap-4">
+        {/* Lado derecho: Pregunta, Opciones y Feedback (5 columnas si hay balanza, 8 columnas centradas en una tarjeta si es de opción múltiple de texto) */}
+        <div className={`${reto.tipo === 'balanza' ? 'md:col-span-5' : 'md:col-span-8 md:col-start-3 lg:col-span-6 lg:col-start-4 bg-white p-6 md:p-8 border border-tinta/10 rounded-2xl shadow-sm'} flex flex-col gap-4`}>
           <span className="text-base md:text-lg font-bold text-tinta leading-snug">
             {reto.pregunta}
           </span>
