@@ -291,6 +291,56 @@
           }
         ],
         "pista": "Intenta recordar si puedes sumar peras con manzanas. Si no tienen la misma variable, no se pueden sumar."
+      },
+      {
+        "id": "reto-semejantes-4",
+        "tipo": "opcion",
+        "pregunta": "Simplifica la siguiente expresión: 7x - 2x + 4y - y",
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "5x + 3y",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "9x + 5y",
+            "ok": false,
+            "reflexion": "Recuerda que los signos menos indican resta. A 7x debes restarle 2x, y a 4y debes restarle una y."
+          },
+          {
+            "id": "c",
+            "texto": "8xy",
+            "ok": false,
+            "reflexion": "No puedes juntar x con y, deben quedar separadas."
+          }
+        ],
+        "pista": "Agrupa las x con las x (7x - 2x) y las y con las y (4y - y)."
+      },
+      {
+        "id": "reto-semejantes-5",
+        "tipo": "opcion",
+        "pregunta": "Simplifica: 10a + 5b - 10a + 2b",
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "7b",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "20a + 7b",
+            "ok": false,
+            "reflexion": "Cuidado con los signos. Tienes 10a y luego restas 10a. ¿Qué pasa con ellas?"
+          },
+          {
+            "id": "c",
+            "texto": "17ab",
+            "ok": false,
+            "reflexion": "No debes mezclar a con b."
+          }
+        ],
+        "pista": "Si a 10a le restas 10a, el resultado es 0. Solo quedan los términos con b."
       }
     ],
     "lec-balanza": [
@@ -409,6 +459,87 @@
         "ladoDerechoResuelto": "5",
         "subtituloResuelto": "¡Perfecto! Dividiste ambos lados entre 3 y encontraste que x = 5.",
         "fichaValor": "÷3",
+        "terminoIzquierdo": "x"
+      },
+      {
+        "id": "reto-balanza-4",
+        "tipo": "balanza",
+        "pregunta": "¿Cuál es el primer paso para despejar x en la ecuación 4x + 2 = 14?",
+        "ecuacionOriginal": "4x + 2 = 14",
+        "platilloIzquierdo": {
+          "terminos": [
+            "4x",
+            "+2"
+          ],
+          "mostrarTres": true
+        },
+        "platilloDerecho": {
+          "valor": 14
+        },
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "Restar 2 en ambos lados",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "Dividir entre 4",
+            "ok": false,
+            "reflexion": "Si divides ahora, tendrías que dividir también el 2. Es mejor quitar primero la suma."
+          },
+          {
+            "id": "c",
+            "texto": "Sumar 2 en ambos lados",
+            "ok": false,
+            "reflexion": "El 2 ya está sumando. Si sumas 2 más, tendrás 4x + 4. Debes deshacer la suma con una resta."
+          }
+        ],
+        "pista": "Deshaz primero la suma de 2 en el platillo izquierdo restando 2 en ambos lados de la balanza.",
+        "ecuacionResuelta": "4x = 12",
+        "ladoDerechoResuelto": "12",
+        "subtituloResuelto": "¡Excelente! Al restar 2 en ambos lados, la balanza se mantiene equilibrada en 4x = 12.",
+        "fichaValor": "+2",
+        "terminoIzquierdo": "4x"
+      },
+      {
+        "id": "reto-balanza-5",
+        "tipo": "balanza",
+        "pregunta": "Tienes la balanza equilibrada en 4x = 12. ¿Cómo despejas x para saber su valor final?",
+        "ecuacionOriginal": "4x = 12",
+        "platilloIzquierdo": {
+          "terminos": [
+            "4x"
+          ],
+          "mostrarTres": true
+        },
+        "platilloDerecho": {
+          "valor": 12
+        },
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "Dividir ambos lados entre 4",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "Restar 4 en ambos lados",
+            "ok": false,
+            "reflexion": "El 4 está multiplicando a la x. Restar 4 no despejaría la x."
+          },
+          {
+            "id": "c",
+            "texto": "Multiplicar ambos lados por 4",
+            "ok": false,
+            "reflexion": "Si multiplicas por 4, la x queda aún más acompañada. Aplica la operación inversa (división)."
+          }
+        ],
+        "pista": "La x está multiplicada por 4. Para dejarla sola, divide entre 4 en ambos lados.",
+        "ecuacionResuelta": "x = 3",
+        "ladoDerechoResuelto": "3",
+        "subtituloResuelto": "¡Perfecto! Dividiste ambos lados entre 4 y encontraste que x = 3.",
+        "fichaValor": "÷4",
         "terminoIzquierdo": "x"
       }
     ]
