@@ -325,25 +325,48 @@ export function submitRetoAttempt(
 
   // Si pasó, actualizar el progreso de la habilidad
   if (passed) {
-    let progress = db.progressRecords.find(
-      (pr) => pr.userId === userId && pr.habilidadId === habilidadId
-    );
-    
-    if (progress) {
-      progress.completa = true;
-      progress.intentos = attempt.intentos;
-      progress.updatedAt = now;
-    } else {
-      progress = {
-        id: `pr-${Date.now()}`,
-        userId,
-        habilidadId,
-        completa: true,
-        intentos: attempt.intentos,
-        createdAt: now,
-        updatedAt: now
-      };
-      db.progressRecords.push(progress);
+    // Buscar la lección asociada a esta habilidad en la base de datos para obtener su leccionId
+    let leccionId: string | undefined;
+    for (const u of db.units) {
+      const hab = u.habilidades.find((h) => h.id === habilidadId);
+      if (hab) {
+        leccionId = hab.leccionId;
+        break;
+      }
+    }
+
+    let allPassed = true;
+    if (leccionId) {
+      const leccionRetos = db.retos[leccionId] || [];
+      // Todos los retos de esta lección deben estar superados (este intento actual ya cuenta como aprobado)
+      allPassed = leccionRetos.every((r) => {
+        if (r.id === retoId) return true;
+        return db.attempts.some((a) => a.userId === userId && a.retoId === r.id && a.passed);
+      });
+    }
+
+    // Solo marcamos la habilidad como completa en el camino del estudiante si aprobó TODOS sus retos prácticos
+    if (allPassed) {
+      let progress = db.progressRecords.find(
+        (pr) => pr.userId === userId && pr.habilidadId === habilidadId
+      );
+      
+      if (progress) {
+        progress.completa = true;
+        progress.intentos = attempt.intentos;
+        progress.updatedAt = now;
+      } else {
+        progress = {
+          id: `pr-${Date.now()}`,
+          userId,
+          habilidadId,
+          completa: true,
+          intentos: attempt.intentos,
+          createdAt: now,
+          updatedAt: now
+        };
+        db.progressRecords.push(progress);
+      }
     }
 
     // Actualizar racha
@@ -557,4 +580,58 @@ export function resetDbToSeed(): void {
   } catch (error) {
     console.error('Error restableciendo DB:', error);
   }
+}
+
+export interface SiguienteReto {
+  id: string;
+  titulo: string;
+  leccionId: string;
+  duracionEstimada: string;
+  unidadNombre: string;
+}
+
+export function getSiguienteRetoRecomendado(userId: string): SiguienteReto | null {
+  const db = getDb();
+  
+  // 1. Obtener IDs de todos los retos completados por el usuario
+  const completedRetos = new Set(
+    db.attempts
+      .filter((a) => a.userId === userId && a.passed)
+      .map((a) => a.retoId)
+  );
+
+  // 2. Recorrer las unidades del usuario en orden
+  const units = getUnitsForUser(userId);
+  
+  for (const unit of units) {
+    if (unit.estado === 'bloqueada') continue;
+    
+    for (const hab of unit.habilidades) {
+      // Si la habilidad no está completa y tiene una lección asociada
+      if (!hab.completa && hab.leccionId) {
+        const leccionRetos = db.retos[hab.leccionId] || [];
+        // Buscar el primer reto no completado
+        const nextReto = leccionRetos.find((r) => !completedRetos.has(r.id));
+        
+        if (nextReto) {
+          return {
+            id: nextReto.id,
+            titulo: nextReto.pregunta.length > 40 ? nextReto.pregunta.substring(0, 40) + '...' : nextReto.pregunta,
+            leccionId: hab.leccionId,
+            duracionEstimada: hab.leccionId === 'lec-balanza' ? 'Video 5 min + Reto' : 'Video 4 min + Reto',
+            unidadNombre: unit.nombre
+          };
+        }
+      }
+    }
+  }
+  
+  // Retorno por defecto si todo está completo o no hay retos
+  return {
+    id: 'reto-balanza-1',
+    titulo: 'La balanza: resolver 2x + 3 = 11',
+    leccionId: 'lec-balanza',
+    duracionEstimada: 'Video 5 min + Reto',
+    unidadNombre: 'Ecuaciones lineales'
+  };
 }

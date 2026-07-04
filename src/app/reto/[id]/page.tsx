@@ -53,21 +53,25 @@ export default function RetoPage({ params }: PageProps) {
     icono: string;
   } | null>(null);
 
+  const [habilidadId, setHabilidadId] = useState<string>('h3-2');
+
   useEffect(() => {
     async function fetchReto() {
       try {
-        // En este MVP simplificado cargamos los retos de la lección "lec-balanza"
-        const res = await fetch('/api/leccion/lec-balanza');
+        // Consultar el reto de manera dinámica mediante la API genérica por ID
+        const res = await fetch(`/api/reto/${id}`);
         if (!res.ok) {
-          router.push('/dashboard');
+          window.location.href = '/dashboard';
           return;
         }
         const data = await res.json();
-        const foundReto = data.retos.find((r: Reto) => r.id === id);
-        if (foundReto) {
-          setReto(foundReto);
+        if (data.reto) {
+          setReto(data.reto);
+          if (data.habilidadId) {
+            setHabilidadId(data.habilidadId);
+          }
         } else {
-          router.push('/dashboard');
+          window.location.href = '/dashboard';
         }
       } catch (err) {
         console.error('Error fetching challenge:', err);
@@ -76,7 +80,7 @@ export default function RetoPage({ params }: PageProps) {
       }
     }
     fetchReto();
-  }, [id, router]);
+  }, [id]);
 
   if (loading) {
     return (
@@ -105,14 +109,14 @@ export default function RetoPage({ params }: PageProps) {
     const totalAttempts = intentos + 1;
     setIntentos(totalAttempts);
 
-    // Enviar resultado a la API
+    // Enviar resultado a la API con la habilidad correspondiente al reto
     try {
       const res = await fetch('/api/student/reto/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           retoId: reto.id,
-          habilidadId: 'h3-2', // Habilidad de la balanza
+          habilidadId: habilidadId,
           passed: true
         })
       });
@@ -148,7 +152,7 @@ export default function RetoPage({ params }: PageProps) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             retoId: reto.id,
-            habilidadId: 'h3-2',
+            habilidadId: habilidadId,
             passed: false
           })
         });
@@ -159,8 +163,7 @@ export default function RetoPage({ params }: PageProps) {
   };
 
   const terminarReto = () => {
-    router.push('/dashboard');
-    router.refresh();
+    window.location.href = '/dashboard';
   };
 
   return (

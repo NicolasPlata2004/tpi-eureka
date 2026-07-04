@@ -75,14 +75,15 @@ export default function Balanza({
   const tiltProgress = resuelto ? 0 : (isDragging ? dragProgress : 0);
   
   // Ángulo de rotación del brazo (máximo 6.5 grados)
-  const rotation = -tiltProgress * 6.5; 
+  // Ángulo de rotación del brazo (máximo 6.5 grados, positivo para rotación horaria)
+  const rotation = tiltProgress * 6.5; 
   
   // Conversión a radianes para cálculo trigonométrico
   const rad = (rotation * Math.PI) / 180;
   
   // Desplazamiento vertical exacto en los extremos del brazo de 340px (mitad = 170px)
-  const leftPanY = 170 * Math.sin(rad); // Sube (negativo)
-  const rightPanY = -leftPanY;          // Baja (positivo)
+  const leftPanY = -170 * Math.sin(rad); // Sube (negativo)
+  const rightPanY = 170 * Math.sin(rad);  // Baja (positivo)
 
   // Efecto spring de rebote orgánico para transiciones cuando regresa a equilibrio
   const springTransition = isDragging ? 'none' : 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
