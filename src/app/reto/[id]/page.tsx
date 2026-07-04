@@ -21,6 +21,11 @@ interface Reto {
   platilloDerecho: { valor: number };
   opciones: RetoOpcion[];
   pista: string;
+  ecuacionResuelta?: string;
+  ladoDerechoResuelto?: string;
+  subtituloResuelto?: string;
+  fichaValor?: string;
+  terminoIzquierdo?: string;
 }
 
 interface PageProps {
@@ -197,12 +202,14 @@ export default function RetoPage({ params }: PageProps) {
         {/* Lado izquierdo: Balanza (7 columnas) */}
         <div className="md:col-span-7 flex flex-col items-center gap-4 w-full">
           <Balanza
-            ecuacion={resuelto ? '2x = 8' : reto.ecuacionOriginal}
+            ecuacion={resuelto ? (reto.ecuacionResuelta || '2x = 8') : reto.ecuacionOriginal}
             mostrarTres={!resuelto}
-            ladoDerecho={resuelto ? '8' : String(reto.platilloDerecho?.valor)}
+            ladoDerecho={resuelto ? (reto.ladoDerechoResuelto || '8') : String(reto.platilloDerecho?.valor)}
             onCorrectAction={handleCorrectAction}
             resuelto={resuelto}
-            subtitulo={resuelto ? '¡Eso es! Quitaste 3 de cada lado de la balanza.' : undefined}
+            subtitulo={resuelto ? (reto.subtituloResuelto || '¡Eso es! Quitaste 3 de cada lado de la balanza.') : undefined}
+            fichaValor={reto.fichaValor}
+            terminoIzquierdo={reto.terminoIzquierdo}
           />
         </div>
 

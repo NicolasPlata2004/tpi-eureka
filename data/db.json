@@ -216,11 +216,88 @@
     }
   },
   "retos": {
+    "lec-semejantes": [
+      {
+        "id": "reto-semejantes-1",
+        "tipo": "opcion",
+        "pregunta": "¿Cuál de las siguientes opciones agrupa correctamente los términos semejantes de 3x + 2y - x + 5y?",
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "2x + 7y",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "4x + 7y",
+            "ok": false,
+            "reflexion": "¡Cuidado con el signo! El término es -x, lo que significa restar 1x a 3x. ¿Cuánto es 3 - 1?"
+          },
+          {
+            "id": "c",
+            "texto": "9xy",
+            "ok": false,
+            "reflexion": "Recuerda que no puedes sumar x con y. Son de familias diferentes (manzanas con peras). Deben quedar separados."
+          }
+        ],
+        "pista": "Agrupa las x con las x (3x - x) y las y con las y (2y + 5y). Luego realiza las operaciones numéricas de los coeficientes."
+      },
+      {
+        "id": "reto-semejantes-2",
+        "tipo": "opcion",
+        "pregunta": "Simplifica la expresión algebraica: 5a + 3b - 2a - b",
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "3a + 2b",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "3a - 2b",
+            "ok": false,
+            "reflexion": "Casi. Fíjate en los términos de b: tienes +3b y luego restas b (-1b). ¿3 - 1 es positivo o negativo?"
+          },
+          {
+            "id": "c",
+            "texto": "7a + 4b",
+            "ok": false,
+            "reflexion": "Recuerda restar los términos que tienen signos negativos, como -2a y -b. No los sumes todos."
+          }
+        ],
+        "pista": "Agrupa y resta: para la variable 'a' calcula (5a - 2a), y para la 'b' calcula (3b - 1b)."
+      },
+      {
+        "id": "reto-semejantes-3",
+        "tipo": "opcion",
+        "pregunta": "¿Se puede simplificar la expresión 4x + 4y en un solo término?",
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "No, porque tienen variables diferentes (x e y).",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "Sí, sumando los coeficientes para obtener 8xy.",
+            "ok": false,
+            "reflexion": "Recuerda la regla de oro: solo puedes simplificar términos si sus letras y exponentes son exactamente iguales. x e y no se pueden mezclar."
+          },
+          {
+            "id": "c",
+            "texto": "Sí, multiplicando para dar 16xy.",
+            "ok": false,
+            "reflexion": "Estamos sumando términos, no multiplicando. Si las letras no son iguales, la expresión ya está en su forma más simple."
+          }
+        ],
+        "pista": "Intenta recordar si puedes sumar peras con manzanas. Si no tienen la misma variable, no se pueden sumar."
+      }
+    ],
     "lec-balanza": [
       {
         "id": "reto-balanza-1",
         "tipo": "balanza",
-        "pregunta": "¿Cuál es el primer paso para despejar x?",
+        "pregunta": "¿Cuál es el primer paso para despejar x en la ecuación 2x + 3 = 11?",
         "ecuacionOriginal": "2x + 3 = 11",
         "platilloIzquierdo": {
           "terminos": [
@@ -248,10 +325,91 @@
             "id": "c",
             "texto": "Sumar 3 en ambos lados",
             "ok": false,
-            "reflexion": "Fíjate en el platillo izquierdo: el 3 ya está sumando. Si sumas otro 3, ¿la x queda más sola o más acompañada? ¿Qué operación deshace una suma?"
+            "reflexion": "Fíjate en el platillo izquierdo: el 3 ya está sumando. Si sumas otro 3, la x quedará más acompañada. ¿Qué operación deshace una suma?"
           }
         ],
-        "pista": "Piensa al revés: la x está multiplicada por 2 y luego le sumaron 3. Para despejarla, deshaz primero lo último que le hicieron."
+        "pista": "La x está multiplicada por 2 y luego le sumaron 3. Para despejarla, deshaz primero lo último que le hicieron (+3)."
+      },
+      {
+        "id": "reto-balanza-2",
+        "tipo": "balanza",
+        "pregunta": "¿Cuál es el primer paso para despejar x en la ecuación 3x + 5 = 20?",
+        "ecuacionOriginal": "3x + 5 = 20",
+        "platilloIzquierdo": {
+          "terminos": [
+            "3x",
+            "+5"
+          ],
+          "mostrarTres": true
+        },
+        "platilloDerecho": {
+          "valor": 20
+        },
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "Restar 5 en ambos lados",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "Dividir todo entre 3",
+            "ok": false,
+            "reflexion": "Si divides ahora, tendrías que dividir también el 5. Es mucho más fácil quitar primero lo que suma o resta."
+          },
+          {
+            "id": "c",
+            "texto": "Sumar 5 en ambos lados",
+            "ok": false,
+            "reflexion": "El 5 ya está sumando en el lado izquierdo. Si sumas 5 más, tendrás 3x + 10. Para deshacer una suma debes aplicar la resta."
+          }
+        ],
+        "pista": "Deshaz primero la suma de 5 en el platillo izquierdo restando 5 en ambos lados de la balanza.",
+        "ecuacionResuelta": "3x = 15",
+        "ladoDerechoResuelto": "15",
+        "subtituloResuelto": "¡Excelente! Al restar 5 en ambos lados, la balanza se mantiene equilibrada en 3x = 15.",
+        "fichaValor": "+5",
+        "terminoIzquierdo": "3x"
+      },
+      {
+        "id": "reto-balanza-3",
+        "tipo": "balanza",
+        "pregunta": "Tienes la balanza equilibrada en 3x = 15. ¿Cómo despejas x para saber su valor final?",
+        "ecuacionOriginal": "3x = 15",
+        "platilloIzquierdo": {
+          "terminos": [
+            "3x"
+          ],
+          "mostrarTres": true
+        },
+        "platilloDerecho": {
+          "valor": 15
+        },
+        "opciones": [
+          {
+            "id": "a",
+            "texto": "Dividir ambos lados entre 3",
+            "ok": true
+          },
+          {
+            "id": "b",
+            "texto": "Restar 3 en ambos lados",
+            "ok": false,
+            "reflexion": "El 3 está multiplicando a la x (3 veces x). Restar 3 no despejaría la x. ¿Qué operación matemática deshace una multiplicación?"
+          },
+          {
+            "id": "c",
+            "texto": "Multiplicar ambos lados por 3",
+            "ok": false,
+            "reflexion": "Si multiplicas por 3, tendrías 9x = 45. ¡La x queda aún más acompañada! Aplica la operación inversa para despejar."
+          }
+        ],
+        "pista": "La x está multiplicada por 3. Para dejarla sola, divide entre 3 en ambos lados de la balanza.",
+        "ecuacionResuelta": "x = 5",
+        "ladoDerechoResuelto": "5",
+        "subtituloResuelto": "¡Perfecto! Dividiste ambos lados entre 3 y encontraste que x = 5.",
+        "fichaValor": "÷3",
+        "terminoIzquierdo": "x"
       }
     ]
   },

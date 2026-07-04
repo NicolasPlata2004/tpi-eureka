@@ -9,6 +9,8 @@ interface BalanzaProps {
   onCorrectAction: () => void;
   resuelto: boolean;
   subtitulo?: string;
+  fichaValor?: string;
+  terminoIzquierdo?: string;
 }
 
 export default function Balanza({
@@ -17,7 +19,9 @@ export default function Balanza({
   ladoDerecho,
   onCorrectAction,
   resuelto,
-  subtitulo
+  subtitulo,
+  fichaValor = '+3',
+  terminoIzquierdo = '2x'
 }: BalanzaProps) {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
@@ -37,7 +41,6 @@ export default function Balanza({
       x: e.clientX - position.x,
       y: e.clientY - position.y
     };
-    // Capturar el puntero para que siga arrastrando fuera del elemento
     dragRef.current?.setPointerCapture(e.pointerId);
   };
 
@@ -54,9 +57,6 @@ export default function Balanza({
     dragRef.current?.releasePointerCapture(e.pointerId);
 
     // Validar si se arrastró hacia el lado derecho (platillo derecho)
-    // El platillo izquierdo está a la izquierda (~8px a ~188px)
-    // El platillo derecho está a la derecha (~292px a ~472px)
-    // Así que si la coordenada X relativa es mayor a 180px, consideramos que se soltó en la derecha.
     if (position.x > 160) {
       onCorrectAction();
     } else {
@@ -64,6 +64,28 @@ export default function Balanza({
       setPosition({ x: 0, y: 0 });
     }
   };
+
+  // --- CÁLCULO FÍSICO Y TRIGONOMÉTRICO DE INCLINACIÓN ---
+  // Distancia euclidiana del arrastre actual
+  const dragDistance = Math.sqrt(position.x * position.x + position.y * position.y);
+  // Progreso de la inclinación (máximo a los 100px de arrastre)
+  const dragProgress = Math.min(1, dragDistance / 100);
+  
+  // Estado de inclinación: 0 si está resuelto, proporcional si está arrastrando
+  const tiltProgress = resuelto ? 0 : (isDragging ? dragProgress : 0);
+  
+  // Ángulo de rotación del brazo (máximo 6.5 grados)
+  const rotation = -tiltProgress * 6.5; 
+  
+  // Conversión a radianes para cálculo trigonométrico
+  const rad = (rotation * Math.PI) / 180;
+  
+  // Desplazamiento vertical exacto en los extremos del brazo de 340px (mitad = 170px)
+  const leftPanY = 170 * Math.sin(rad); // Sube (negativo)
+  const rightPanY = -leftPanY;          // Baja (positivo)
+
+  // Efecto spring de rebote orgánico para transiciones cuando regresa a equilibrio
+  const springTransition = isDragging ? 'none' : 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
   return (
     <div
@@ -85,8 +107,11 @@ export default function Balanza({
       <div className="relative w-full h-[120px] mt-4">
         {/* Barra superior de la balanza (brazo) */}
         <div
-          style={{ transform: `translateX(-50%) rotate(${isDragging ? -4 : 0}deg)` }}
-          className="absolute left-1/2 top-[12px] w-[340px] h-[6px] rounded bg-tinta origin-center transition-transform duration-300 ease-out"
+          style={{ 
+            transform: `translateX(-50%) rotate(${rotation}deg)`,
+            transition: springTransition
+          }}
+          className="absolute left-1/2 top-[12px] w-[340px] h-[6px] rounded bg-tinta origin-center"
         />
 
         {/* Eje central */}
@@ -96,16 +121,22 @@ export default function Balanza({
 
         {/* Hilo Izquierdo */}
         <div
-          style={{ transform: `translateY(${isDragging ? -12 : 0}px)` }}
-          className="absolute left-[70px] top-[15px] w-[1.5px] h-[34px] bg-slate-500 transition-transform duration-300 ease-out"
+          style={{ 
+            transform: `translateY(${leftPanY}px)`,
+            transition: springTransition
+          }}
+          className="absolute left-[70px] top-[15px] w-[1.5px] h-[34px] bg-slate-500"
         />
         {/* Platillo Izquierdo */}
         <div
-          style={{ transform: `translateY(${isDragging ? -12 : 0}px)` }}
-          className={`absolute left-[15px] top-[48px] w-[112px] h-[44px] rounded-b-2xl bg-bg-soft2 border-2 border-blue-action flex items-center justify-center gap-1 transition-transform duration-300 ease-out`}
+          style={{ 
+            transform: `translateY(${leftPanY}px)`,
+            transition: springTransition
+          }}
+          className="absolute left-[15px] top-[48px] w-[112px] h-[44px] rounded-b-2xl bg-bg-soft2 border-2 border-blue-action flex items-center justify-center gap-1"
         >
           <span className="bg-white border border-blue-action/40 rounded-md px-2 py-0.5 text-sm font-semibold font-mono text-blue-action">
-            2x
+            {terminoIzquierdo}
           </span>
 
           {mostrarTres && (
@@ -115,28 +146,35 @@ export default function Balanza({
               onPointerMove={handlePointerMove}
               onPointerUp={handlePointerUp}
               style={{
-                transform: `translate(${position.x}px, ${position.y}px)`,
-                transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+                // Descontamos la traslación vertical del platillo izquierdo para que no salte bajo el mouse
+                transform: `translate(${position.x}px, ${isDragging ? position.y - leftPanY : 0}px)`,
+                transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                 touchAction: 'none'
               }}
               className={`bg-white border-2 border-blue-action rounded-md px-2 py-0.5 text-sm font-bold font-mono text-blue-action cursor-grab active:cursor-grabbing shadow-sm select-none z-10 ${
                 isDragging ? 'scale-110 shadow-md ring-2 ring-blue-action/30' : ''
               }`}
             >
-              +3
+              {fichaValor}
             </span>
           )}
         </div>
 
         {/* Hilo Derecho */}
         <div
-          style={{ transform: `translateY(${isDragging ? 12 : 0}px)` }}
-          className="absolute right-[70px] top-[15px] w-[1.5px] h-[34px] bg-slate-500 transition-transform duration-300 ease-out"
+          style={{ 
+            transform: `translateY(${rightPanY}px)`,
+            transition: springTransition
+          }}
+          className="absolute right-[70px] top-[15px] w-[1.5px] h-[34px] bg-slate-500"
         />
         {/* Platillo Derecho */}
         <div
-          style={{ transform: `translateY(${isDragging ? 12 : 0}px)` }}
-          className={`absolute right-[15px] top-[48px] w-[112px] h-[44px] rounded-b-2xl bg-[#DDF0E5] border-2 border-green-logro flex items-center justify-center transition-transform duration-300 ease-out`}
+          style={{ 
+            transform: `translateY(${rightPanY}px)`,
+            transition: springTransition
+          }}
+          className="absolute right-[15px] top-[48px] w-[112px] h-[44px] rounded-b-2xl bg-[#DDF0E5] border-2 border-green-logro flex items-center justify-center"
         >
           <span className="bg-white border border-green-logro/40 rounded-md px-3 py-0.5 text-sm font-semibold font-mono text-green-logro">
             {ladoDerecho}
@@ -146,7 +184,7 @@ export default function Balanza({
 
       {!resuelto && (
         <span className="text-[10px] text-slate-400 font-mono">
-          [ Arrastra la ficha +3 hacia el platillo derecho ]
+          [ Arrastra la ficha {fichaValor} hacia el platillo derecho ]
         </span>
       )}
     </div>
