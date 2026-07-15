@@ -208,7 +208,11 @@ export default function Dashboard() {
                                   : 'text-white bg-blue-action hover:bg-blue-action/90 border-blue-action/10'
                               }`}
                             >
-                              {isHabilityCompleted ? '✓' : '▸'} {h.nombre}
+                              {isHabilityCompleted ? (
+                                <><span className="font-extrabold text-sm leading-none">✓</span> Video: {h.nombre}</>
+                              ) : (
+                                <><span className="text-[10px] mr-0.5">▶</span> Video: {h.nombre}</>
+                              )}
                             </button>
                           );
                         }

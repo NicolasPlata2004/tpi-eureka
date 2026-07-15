@@ -176,7 +176,7 @@
       "id": "lec-aritmetica",
       "titulo": "¿Qué es una variable?",
       "unidadId": "u1",
-      "videoUrl": "/manim/AritmeticaAlgebra.mp4",
+      "videoUrl": "/videos/AritmeticaAlgebra.mp4",
       "duracion": "01:30",
       "ideasClave": [
         "El álgebra no es más difícil que la aritmética.",
@@ -189,7 +189,7 @@
       "id": "lec-exponentes",
       "titulo": "Leyes de los Exponentes",
       "unidadId": "u2",
-      "videoUrl": "/manim/LeyesExponentes.mp4",
+      "videoUrl": "/videos/LeyesExponentes.mp4",
       "duracion": "01:00",
       "ideasClave": [
         "Multiplicar la misma base suma exponentes.",
@@ -202,7 +202,7 @@
       "id": "lec-balanza",
       "titulo": "Ecuación Balanza: 2x + 5 = 8",
       "unidadId": "u3",
-      "videoUrl": "/manim/EcuacionBalanza.mp4",
+      "videoUrl": "/videos/EcuacionBalanza.mp4",
       "duracion": "00:45",
       "ideasClave": [
         "Una ecuación es una balanza en equilibrio.",
@@ -215,7 +215,7 @@
       "id": "lec-productos",
       "titulo": "Productos Notables",
       "unidadId": "u4",
-      "videoUrl": "/manim/ProductosNotables.mp4",
+      "videoUrl": "/videos/ProductosNotables.mp4",
       "duracion": "01:10",
       "ideasClave": [
         "Un producto notable no es una fórmula mágica, es un área.",
@@ -228,7 +228,7 @@
       "id": "lec-diferencia",
       "titulo": "Diferencia de Cuadrados",
       "unidadId": "u4",
-      "videoUrl": "/manim/DiferenciaDeCuadrados.mp4",
+      "videoUrl": "/videos/DiferenciaDeCuadrados.mp4",
       "duracion": "01:00",
       "ideasClave": [
         "Al quitar b² de a², nos queda una figura en L.",
@@ -241,7 +241,7 @@
       "id": "lec-pitagoras",
       "titulo": "Teorema de Pitágoras",
       "unidadId": "u5",
-      "videoUrl": "/manim/TeoremaPitagoras.mp4",
+      "videoUrl": "/videos/TeoremaPitagoras.mp4",
       "duracion": "00:50",
       "ideasClave": [
         "No es una fórmula abstracta. Son tres cuadrados reales.",

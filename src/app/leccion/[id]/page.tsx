@@ -149,36 +149,17 @@ export default function LeccionPage({ params }: PageProps) {
         {/* Lado izquierdo: Reproductor de Video Manim (8 columnas) */}
         <div className="md:col-span-8 flex flex-col bg-tinta rounded-2xl shadow-md overflow-hidden relative border border-white/5">
           {/* Contenedor del video */}
-          <div className="aspect-video w-full relative flex flex-col items-center justify-center text-center p-6 bg-slate-950">
-            {/* Fondo decorativo abstracto matemático de Manim */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_50%,rgba(47,109,181,0.18),transparent)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:30px_30px]" />
-
-            {/* Animación del video interactiva simulada */}
-            <div className="z-10 flex flex-col items-center gap-5">
-              <div className="flex items-center gap-6">
-                <div className="w-32 h-16 border-2 border-bg-soft2/80 rounded-xl flex items-center justify-center text-bg-soft2 text-2xl font-semibold font-mono tracking-wide shadow-inner">
-                  2x + 3
-                </div>
-                <div className="w-10 h-0.5 bg-slate-500" />
-                <div className="w-32 h-16 border-2 border-green-logro/80 rounded-xl flex items-center justify-center text-green-logro text-2xl font-semibold font-mono tracking-wide shadow-inner animate-pulse">
-                  11
-                </div>
-              </div>
-              <p className="text-xs text-slate-400 font-mono">
-                {isPlaying 
-                  ? '[ Animación: sustrayendo 3 de ambos lados... ]'
-                  : '[ Video Manim: ¿Por qué la balanza se mantiene en equilibrio? ]'}
-              </p>
-            </div>
-
-            {/* Subtítulos integrados */}
-            {showCC && isPlaying && (
-              <div className="absolute bottom-16 left-1/2 -translate-x-1/2 bg-black/80 px-4 py-2 rounded-lg max-w-[85%] border border-white/10 text-center z-15">
-                <p className="text-xs md:text-sm text-white font-medium">
-                  &quot;Si restamos 3 en la izquierda para dejar sola a la x, debemos restar 3 también en la derecha para mantener el equilibrio.&quot;
-                </p>
-              </div>
+          <div className="aspect-video w-full relative flex flex-col items-center justify-center bg-black">
+            {leccion.videoUrl ? (
+              <video
+                src={leccion.videoUrl}
+                controls
+                className="w-full h-full object-contain"
+                controlsList="nodownload"
+                poster="/thumbnail-placeholder.png"
+              />
+            ) : (
+              <div className="text-slate-500 font-mono text-sm">No se encontró video para esta lección</div>
             )}
           </div>
 

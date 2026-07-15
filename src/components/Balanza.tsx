@@ -11,9 +11,14 @@ interface Item {
   side: Side;
 }
 
-type AppState = 'playing' | 'error_tilt' | 'error_not_isolated' | 'success';
+type AppState = 'playing' | 'error_tilt' | 'error_mixed' | 'error_not_isolated' | 'success';
 
-export default function Balanza() {
+interface BalanzaProps {
+  onCorrectAction?: () => void;
+  resuelto?: boolean;
+}
+
+export default function Balanza({ onCorrectAction, resuelto }: BalanzaProps) {
   const [equation, setEquation] = useState({ a: 2, b: 2, c: 8, x: 3 });
   const [items, setItems] = useState<Item[]>([]);
   const [appState, setAppState] = useState<AppState>('playing');
@@ -21,8 +26,8 @@ export default function Balanza() {
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [pointerPos, setPointerPos] = useState({ x: 0, y: 0 });
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
-  
   const containerRef = useRef<HTMLDivElement>(null);
+  const [solvedCount, setSolvedCount] = useState(0);
 
   // Generar nueva ecuación
   const generateEquation = () => {
@@ -105,11 +110,18 @@ export default function Balanza() {
     const leftBalls = items.filter(i => i.side === 'left' && i.type === 'ball').length;
     const rightBalls = items.filter(i => i.side === 'right' && i.type === 'ball').length;
 
-    // Condición de victoria: cajas aisladas en un platillo (usualmente el izquierdo), sin bolitas en ese mismo platillo
-    if ((leftBoxes > 0 && leftBalls === 0 && rightBalls > 0) || (rightBoxes > 0 && rightBalls === 0 && leftBalls > 0)) {
-      setAppState('success');
+    const leftIsIsolated = leftBoxes > 0 && leftBalls === 0 && rightBalls > 0 && rightBoxes === 0;
+    const rightIsIsolated = rightBoxes > 0 && rightBalls === 0 && leftBalls > 0 && leftBoxes === 0;
+
+    if (leftIsIsolated || rightIsIsolated) {
+      const boxesCount = leftIsIsolated ? leftBoxes : rightBoxes;
+      if (boxesCount === 1) {
+        setAppState('success');
+      } else {
+        setAppState('error_not_isolated');
+      }
     } else {
-      setAppState('error_not_isolated');
+      setAppState('error_mixed');
     }
   };
 
@@ -157,12 +169,12 @@ export default function Balanza() {
   const tableItems = items.filter(i => i.side === 'table');
 
   return (
-    <div className="flex flex-col items-center gap-6 w-full max-w-[600px] mx-auto">
+    <div className="flex flex-col items-center gap-6 w-full max-w-[600px] mx-auto pb-4">
       
       {/* Caja Principal del Simulador */}
       <div
         ref={containerRef}
-        className="relative w-full h-[360px] bg-white border border-tinta/10 rounded-3xl flex flex-col items-center justify-start p-6 select-none overflow-hidden shadow-sm"
+        className="relative w-full h-[460px] bg-white border border-tinta/10 rounded-3xl flex flex-col items-center justify-start p-6 select-none overflow-hidden shadow-sm"
       >
         <div className="flex flex-col items-center gap-1 mb-2">
           <span className="text-3xl font-semibold tracking-wide font-mono text-tinta">
@@ -216,11 +228,11 @@ export default function Balanza() {
         </div>
 
         {/* Zona de Mesa (Abajo) */}
-        <div className="absolute bottom-0 left-0 w-full h-[90px] bg-yellow-50/60 border-t-2 border-yellow-100 flex flex-col items-center justify-start p-2">
-          <span className="text-[10px] font-bold text-yellow-600 mb-1 uppercase tracking-wider">Mesa de Trabajo</span>
-          <div className="flex flex-wrap items-center justify-center gap-2 w-full px-4">
+        <div className="absolute bottom-0 left-0 w-full min-h-[110px] bg-yellow-50/60 border-t-2 border-yellow-100 flex flex-col items-center justify-start p-3 z-0">
+          <span className="text-[10px] font-bold text-yellow-600 mb-2 uppercase tracking-wider">Mesa de Trabajo</span>
+          <div className="flex flex-wrap items-center justify-center gap-2.5 w-full px-4 relative z-10">
             {tableItems.map(item => renderItem(item, true))}
-            {tableItems.length === 0 && <span className="text-xs text-yellow-500/50 italic">Arrastra piezas aquí</span>}
+            {tableItems.length === 0 && <span className="text-xs text-yellow-500/50 italic mt-2">Arrastra piezas aquí</span>}
           </div>
         </div>
       </div>
@@ -239,14 +251,26 @@ export default function Balanza() {
           </div>
         )}
 
-        {appState === 'error_not_isolated' && (
-          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 flex gap-3 text-left animate-fadeIn">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-blue-600 flex-none">
+        {appState === 'error_mixed' && (
+          <div className="bg-[#FDF1DC] border border-amber-revisar/40 rounded-2xl p-4 flex gap-3 text-left animate-fadeIn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#8A5B10] flex-none">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
             <div className="flex flex-col gap-1">
-              <p className="text-sm font-bold text-blue-700">Aún no hemos terminado</p>
-              <p className="text-xs text-blue-600 leading-relaxed">La balanza está equilibrada, ¡bien! Pero el objetivo es aislar las cajas (x) solas en un platillo, sin bolitas que las acompañen.</p>
+              <p className="text-sm font-bold text-[#8A5B10]">Aún no hemos terminado</p>
+              <p className="text-xs text-[#7A5310] leading-relaxed">El objetivo es dejar las cajas 'x' solas en un platillo, sin bolitas que las acompañen.</p>
+            </div>
+          </div>
+        )}
+
+        {appState === 'error_not_isolated' && (
+          <div className="bg-[#FDF1DC] border border-amber-revisar/40 rounded-2xl p-4 flex gap-3 text-left animate-fadeIn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#8A5B10] flex-none">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-bold text-[#8A5B10]">Casi, pero aún no tienes el valor de 1 sola x</p>
+              <p className="text-xs text-[#7A5310] leading-relaxed">Has aislado las cajas, ¡muy bien! Pero tienes más de una caja en el platillo. Para encontrar el valor de 'x', debes dejar **UNA SOLA** caja, dividiendo (retirando cajas y su equivalente en bolitas hacia la mesa).</p>
             </div>
           </div>
         )}
@@ -264,12 +288,19 @@ export default function Balanza() {
         )}
 
         <div className="flex gap-3">
-          {appState === 'success' ? (
+          {appState === 'success' || resuelto ? (
             <button
-              onClick={generateEquation}
+              onClick={() => {
+                if (solvedCount >= 2 && onCorrectAction) {
+                  onCorrectAction();
+                } else {
+                  setSolvedCount(prev => prev + 1);
+                  generateEquation();
+                }
+              }}
               className="flex-1 bg-green-logro hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"
             >
-              <span>Siguiente Reto</span>
+              <span>{solvedCount >= 2 ? 'Terminar Reto' : 'Siguiente Ecuación'}</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
               </svg>
