@@ -42,3 +42,15 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el 
 2. En la pantalla de acceso para desarrollo (`/auth/dev-login`), selecciona una cuenta de prueba:
    - **Valentina (Estudiante):** Para ver el árbol de habilidades, racha de días, ver lecciones con reproductor Manim simulado y resolver el reto interactivo de la balanza.
    - **Profesor Carlos (Docente):** Para acceder al panel docente privado, ver estadísticas de dificultad y descargar la lista de alumnos en formato CSV.
+
+---
+
+## Cómo Contribuir (y ver los cambios en Vercel)
+
+Si quieres ayudar a mejorar Eureka o probar cambios en el código, el proceso es muy sencillo gracias a nuestra integración continua con Vercel.
+
+1. **Haz un Fork del repositorio**: Crea una copia del proyecto en tu propia cuenta de GitHub.
+2. **Crea una nueva rama**: Trabaja tus cambios en una rama local (ej. `git checkout -b mejora-interfaz`).
+3. **Sube tus cambios y abre un Pull Request (PR)**: Cuando estés listo, haz un push a tu fork y abre un Pull Request hacia la rama `main` de este repositorio original.
+4. **Visualiza tus cambios en Vercel (Preview Deployment)**: Una vez que abras el Pull Request, Vercel detectará automáticamente los cambios y generará un enlace temporal. Podrás encontrar este enlace en los comentarios automáticos del bot de Vercel dentro de tu mismo Pull Request. ¡Así todo el equipo podrá ver y probar tus cambios en vivo antes de que sean aprobados!
+5. **Aprobación y Despliegue a Producción**: Si tus cambios son revisados y aprobados, se fusionarán (merge) a la rama `main`. Vercel desplegará automáticamente esta nueva versión oficial en [tpi-eureka.vercel.app](https://tpi-eureka.vercel.app/).
