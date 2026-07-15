@@ -60,7 +60,7 @@ export default function Dashboard() {
   const [watchedVideos, setWatchedVideos] = useState<string[]>([]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.watchedVideos) {
+    if (typeof window !== 'undefined' && Array.isArray(window.watchedVideos)) {
       setWatchedVideos([...window.watchedVideos]);
     }
   }, []);
@@ -126,18 +126,18 @@ export default function Dashboard() {
       
       // Recalculate habilidades completeness based on watchedVideos
       const updatedHabilidades = habs.map(h => {
-        if (!h) return h;
+        if (!h) return null;
         const isWatched = h.leccionId && Array.isArray(watchedVideos) && watchedVideos.includes(h.leccionId);
         return {
           ...h,
-          completa: h.completa || !!isWatched
+          completa: Boolean(h.completa || isWatched)
         };
-      });
+      }).filter((h): h is Habilidad => h !== null);
 
-      const completedCount = updatedHabilidades.filter(h => h && h.completa).length;
+      const completedCount = updatedHabilidades.filter(h => h.completa).length;
       
       // If this unit has any completed (or watched) habilidades, or was not blocked, it becomes active
-      const hasWatchedAny = updatedHabilidades.some(h => h && h.leccionId && Array.isArray(watchedVideos) && watchedVideos.includes(h.leccionId));
+      const hasWatchedAny = updatedHabilidades.some(h => h.leccionId && Array.isArray(watchedVideos) && watchedVideos.includes(h.leccionId));
       
       let estado = unit.estado;
       let progreso = unit.progreso;
@@ -160,7 +160,7 @@ export default function Dashboard() {
         progreso,
         estado
       };
-    }).filter((u): u is NonNullable<typeof u> => u !== null);
+    }).filter((u): u is Unit => u !== null);
   }, [units, watchedVideos]);
 
   return (
@@ -220,7 +220,7 @@ export default function Dashboard() {
                               ? 'Se desbloquea al avanzar en Ecuaciones'
                               : unit.estado === 'completa'
                               ? 'Habilidades dominadas'
-                              : `En progreso · ${unit.habilidades.filter(h => h.completa).length} de ${unit.habilidades.length} completadas`}
+                              : `En progreso · ${unit.habilidades.filter(h => h && h.completa).length} de ${unit.habilidades.length} completadas`}
                           </p>
                         </div>
                       </div>
@@ -253,6 +253,7 @@ export default function Dashboard() {
                     {/* Lista de habilidades secundarias (Ahora siempre visibles y clickeables si tienen leccionId) */}
                     <div className="flex flex-wrap gap-2 mt-2">
                       {unit.habilidades.map((h) => {
+                        if (!h) return null;
                         const isHabilityCompleted = h.completa || isU1;
                         
                         // Si tiene video/leccion, siempre permitir entrar

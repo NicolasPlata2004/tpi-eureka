@@ -138,7 +138,7 @@ export default function DevLogin() {
                   >
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-full bg-blue-action/10 border border-blue-action/20 flex items-center justify-center font-bold text-blue-action text-sm">
-                        {u.name.charAt(0).toUpperCase()}
+                        {(u.name || '').charAt(0).toUpperCase()}
                       </div>
                       <div>
                         <p className="font-semibold text-sm text-tinta">{u.name}</p>

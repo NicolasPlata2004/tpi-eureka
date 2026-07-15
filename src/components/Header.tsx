@@ -89,7 +89,7 @@ export default function Header() {
                   onClick={() => setDropdownOpen(!dropdownOpen)}
                   className="w-9 h-9 rounded-full bg-bg-soft2 border border-blue-action/20 text-blue-action flex items-center justify-center font-bold text-sm hover:bg-blue-action hover:text-white transition-all cursor-pointer relative z-50"
                 >
-                  {user.name.charAt(0).toUpperCase()}
+                  {(user.name || '').charAt(0).toUpperCase()}
                 </button>
                 
                 {/* Backdrop transparente para cerrar al hacer clic afuera */}
