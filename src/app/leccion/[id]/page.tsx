@@ -54,7 +54,7 @@ export default function LeccionPage({ params }: PageProps) {
         setRetos(data.retos);
         setNextRetoId(data.nextRetoId || (data.retos.length > 0 ? data.retos[0].id : null));
         
-        if (typeof window !== 'undefined') {
+        if (data && data.leccion && typeof window !== 'undefined') {
           window.watchedVideos = window.watchedVideos || [];
           if (!window.watchedVideos.includes(data.leccion.id)) {
             window.watchedVideos.push(data.leccion.id);

@@ -120,19 +120,24 @@ export default function Dashboard() {
   const processedUnits = useMemo(() => {
     if (!units || !Array.isArray(units)) return [];
     return units.map(unit => {
+      if (!unit) return null;
+      
+      const habs = Array.isArray(unit.habilidades) ? unit.habilidades : [];
+      
       // Recalculate habilidades completeness based on watchedVideos
-      const updatedHabilidades = unit.habilidades.map(h => {
-        const isWatched = h.leccionId && watchedVideos.includes(h.leccionId);
+      const updatedHabilidades = habs.map(h => {
+        if (!h) return h;
+        const isWatched = h.leccionId && Array.isArray(watchedVideos) && watchedVideos.includes(h.leccionId);
         return {
           ...h,
           completa: h.completa || !!isWatched
         };
       });
 
-      const completedCount = updatedHabilidades.filter(h => h.completa).length;
+      const completedCount = updatedHabilidades.filter(h => h && h.completa).length;
       
       // If this unit has any completed (or watched) habilidades, or was not blocked, it becomes active
-      const hasWatchedAny = updatedHabilidades.some(h => h.leccionId && watchedVideos.includes(h.leccionId));
+      const hasWatchedAny = updatedHabilidades.some(h => h && h.leccionId && Array.isArray(watchedVideos) && watchedVideos.includes(h.leccionId));
       
       let estado = unit.estado;
       let progreso = unit.progreso;
@@ -142,7 +147,8 @@ export default function Dashboard() {
       }
       
       if (estado !== 'bloqueada') {
-        progreso = Math.round((completedCount / updatedHabilidades.length) * 100);
+        const totalHab = updatedHabilidades.length;
+        progreso = totalHab > 0 ? Math.round((completedCount / totalHab) * 100) : 0;
         if (progreso === 100) {
           estado = 'completa';
         }
@@ -154,7 +160,7 @@ export default function Dashboard() {
         progreso,
         estado
       };
-    });
+    }).filter((u): u is NonNullable<typeof u> => u !== null);
   }, [units, watchedVideos]);
 
   return (
@@ -176,6 +182,7 @@ export default function Dashboard() {
 
           <div className="flex flex-col gap-6 relative">
             {processedUnits.map((unit, index) => {
+              if (!unit) return null;
               const isU1 = unit.id === 'u1';
               const isU2 = unit.id === 'u2';
               const isU3 = unit.id === 'u3';
