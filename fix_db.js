@@ -42,7 +42,7 @@ const newRetos = {
     };
   }),
   
-  "lec-productos": Array.from({ length: 5 }, (_, i) => ({
+  "lec-productos": Array.from({ length: 1 }, (_, i) => ({
     id: `reto-productos-${i + 1}`,
     tipo: "areas",
     pregunta: "Arma el modelo geométrico para la expresión $(a+b)^2$",
@@ -52,7 +52,7 @@ const newRetos = {
     pista: "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
   })),
   
-  "lec-diferencia": Array.from({ length: 5 }, (_, i) => ({
+  "lec-diferencia": Array.from({ length: 1 }, (_, i) => ({
     id: `reto-diferencia-${i + 1}`,
     tipo: "areas",
     pregunta: "Arma el modelo geométrico para la expresión $a^2 - b^2$",
@@ -62,7 +62,7 @@ const newRetos = {
     pista: "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
   })),
   
-  "lec-pitagoras": Array.from({ length: 5 }, (_, i) => ({
+  "lec-pitagoras": Array.from({ length: 1 }, (_, i) => ({
     id: `reto-pitagoras-${i + 1}`,
     tipo: "areas",
     pregunta: "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",

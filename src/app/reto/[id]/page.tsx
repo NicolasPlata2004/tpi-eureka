@@ -202,6 +202,7 @@ export default function RetoPage({ params }: PageProps) {
       <main className="flex-1 w-full max-w-4xl mx-auto px-6 py-8 md:py-12 flex flex-col relative z-10">
         {currentReto.tipo === 'balanza' && (
           <Balanza 
+            key={currentReto.id}
             reto={currentReto} 
             onCorrectAction={handleCorrectAction} 
             onErrorAction={handleErrorAction} 
@@ -209,6 +210,7 @@ export default function RetoPage({ params }: PageProps) {
         )}
         {currentReto.tipo === 'sustituidor' && (
           <Sustituidor 
+            key={currentReto.id}
             reto={currentReto} 
             onCorrectAction={handleCorrectAction} 
             onErrorAction={handleErrorAction} 
@@ -216,6 +218,7 @@ export default function RetoPage({ params }: PageProps) {
         )}
         {currentReto.tipo === 'simplificador' && (
           <Simplificador 
+            key={currentReto.id}
             reto={currentReto} 
             onCorrectAction={handleCorrectAction} 
             onErrorAction={handleErrorAction} 
@@ -223,6 +226,7 @@ export default function RetoPage({ params }: PageProps) {
         )}
         {currentReto.tipo === 'areas' && (
           <AreaModel 
+            key={currentReto.id}
             reto={currentReto} 
             onCorrectAction={handleCorrectAction} 
             onErrorAction={handleErrorAction} 

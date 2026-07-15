@@ -615,7 +615,7 @@ export function getSiguienteRetoRecomendado(userId: string): SiguienteReto | nul
         
         if (nextReto) {
           return {
-            id: nextReto.id,
+            id: hab.leccionId,
             titulo: nextReto.pregunta.length > 40 ? nextReto.pregunta.substring(0, 40) + '...' : nextReto.pregunta,
             leccionId: hab.leccionId,
             duracionEstimada: hab.leccionId === 'lec-balanza' ? 'Video 5 min + Reto' : 'Video 4 min + Reto',
@@ -628,7 +628,7 @@ export function getSiguienteRetoRecomendado(userId: string): SiguienteReto | nul
   
   // Retorno por defecto si todo está completo o no hay retos
   return {
-    id: 'reto-balanza-1',
+    id: 'lec-balanza',
     titulo: 'La balanza: resolver 2x + 3 = 11',
     leccionId: 'lec-balanza',
     duracionEstimada: 'Video 5 min + Reto',

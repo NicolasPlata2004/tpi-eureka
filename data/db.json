@@ -468,62 +468,6 @@
           "b^2"
         ],
         "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
-      },
-      {
-        "id": "reto-productos-2",
-        "tipo": "areas",
-        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
-        "expresion": "(a+b)^2",
-        "modelo": "cuadrado_binomio",
-        "piezas": [
-          "a^2",
-          "ab",
-          "ab",
-          "b^2"
-        ],
-        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
-      },
-      {
-        "id": "reto-productos-3",
-        "tipo": "areas",
-        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
-        "expresion": "(a+b)^2",
-        "modelo": "cuadrado_binomio",
-        "piezas": [
-          "a^2",
-          "ab",
-          "ab",
-          "b^2"
-        ],
-        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
-      },
-      {
-        "id": "reto-productos-4",
-        "tipo": "areas",
-        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
-        "expresion": "(a+b)^2",
-        "modelo": "cuadrado_binomio",
-        "piezas": [
-          "a^2",
-          "ab",
-          "ab",
-          "b^2"
-        ],
-        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
-      },
-      {
-        "id": "reto-productos-5",
-        "tipo": "areas",
-        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
-        "expresion": "(a+b)^2",
-        "modelo": "cuadrado_binomio",
-        "piezas": [
-          "a^2",
-          "ab",
-          "ab",
-          "b^2"
-        ],
-        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
       }
     ],
     "lec-diferencia": [
@@ -538,107 +482,11 @@
           "b^2"
         ],
         "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
-      },
-      {
-        "id": "reto-diferencia-2",
-        "tipo": "areas",
-        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
-        "expresion": "a^2 - b^2",
-        "modelo": "diferencia_cuadrados",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
-      },
-      {
-        "id": "reto-diferencia-3",
-        "tipo": "areas",
-        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
-        "expresion": "a^2 - b^2",
-        "modelo": "diferencia_cuadrados",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
-      },
-      {
-        "id": "reto-diferencia-4",
-        "tipo": "areas",
-        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
-        "expresion": "a^2 - b^2",
-        "modelo": "diferencia_cuadrados",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
-      },
-      {
-        "id": "reto-diferencia-5",
-        "tipo": "areas",
-        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
-        "expresion": "a^2 - b^2",
-        "modelo": "diferencia_cuadrados",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
       }
     ],
     "lec-pitagoras": [
       {
         "id": "reto-pitagoras-1",
-        "tipo": "areas",
-        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
-        "expresion": "a^2 + b^2 = c^2",
-        "modelo": "pitagoras",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
-      },
-      {
-        "id": "reto-pitagoras-2",
-        "tipo": "areas",
-        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
-        "expresion": "a^2 + b^2 = c^2",
-        "modelo": "pitagoras",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
-      },
-      {
-        "id": "reto-pitagoras-3",
-        "tipo": "areas",
-        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
-        "expresion": "a^2 + b^2 = c^2",
-        "modelo": "pitagoras",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
-      },
-      {
-        "id": "reto-pitagoras-4",
-        "tipo": "areas",
-        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
-        "expresion": "a^2 + b^2 = c^2",
-        "modelo": "pitagoras",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
-      },
-      {
-        "id": "reto-pitagoras-5",
         "tipo": "areas",
         "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
         "expresion": "a^2 + b^2 = c^2",
