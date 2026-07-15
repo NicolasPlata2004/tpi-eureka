@@ -74,8 +74,8 @@ export default function Dashboard() {
         }
         const data = await res.json();
         setUser(data.user);
-        setUnits(data.units);
-        setAchievements(data.achievements);
+        setUnits(data.units || []);
+        setAchievements(data.achievements || []);
 
         // Fetch recommended next challenge
         const nextRes = await fetch('/api/student/siguiente-reto');
@@ -118,6 +118,7 @@ export default function Dashboard() {
   ];
 
   const processedUnits = useMemo(() => {
+    if (!units || !Array.isArray(units)) return [];
     return units.map(unit => {
       // Recalculate habilidades completeness based on watchedVideos
       const updatedHabilidades = unit.habilidades.map(h => {
@@ -294,7 +295,7 @@ export default function Dashboard() {
                   </div>
 
                   {/* Conector de unidades */}
-                  {index < units.length - 1 && (
+                  {index < processedUnits.length - 1 && (
                     <div className="w-[3px] h-6 bg-slate-300/40 rounded-full mx-10 my-1 self-start" />
                   )}
                 </div>
