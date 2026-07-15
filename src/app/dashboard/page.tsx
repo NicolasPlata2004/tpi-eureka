@@ -191,46 +191,51 @@ export default function Dashboard() {
                       </div>
                     )}
 
-                    {/* Lista de habilidades secundarias */}
-                    {!isBlocked && (
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        {unit.habilidades.map((h) => {
-                          const isHabilityCompleted = h.completa || isU1;
-                          
-                          if (isHabilityCompleted) {
-                            return (
-                              <span
-                                key={h.id}
-                                className="text-xs font-semibold text-green-logro bg-[#DDF0E5] px-3 py-1.5 rounded-full flex items-center gap-1 border border-green-logro/15"
-                              >
-                                ✓ {h.nombre}
-                              </span>
-                            );
-                          }
+                    {/* Lista de habilidades secundarias (Ahora siempre visibles y clickeables si tienen leccionId) */}
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {unit.habilidades.map((h) => {
+                        const isHabilityCompleted = h.completa || isU1;
+                        
+                        // Si tiene video/leccion, siempre permitir entrar
+                        if (h.leccionId) {
+                          return (
+                            <button
+                              key={h.id}
+                              onClick={() => router.push(`/leccion/${h.leccionId}`)}
+                              className={`text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm transition-all cursor-pointer border active:scale-95 ${
+                                isHabilityCompleted
+                                  ? 'text-green-logro bg-[#DDF0E5] hover:bg-[#DDF0E5]/80 border-green-logro/20'
+                                  : 'text-white bg-blue-action hover:bg-blue-action/90 border-blue-action/10'
+                              }`}
+                            >
+                              {isHabilityCompleted ? '✓' : '▸'} {h.nombre}
+                            </button>
+                          );
+                        }
 
-                          if (h.activa) {
-                            return (
-                              <button
-                                key={h.id}
-                                onClick={() => router.push(`/leccion/${h.leccionId}`)}
-                                className="text-xs font-bold text-white bg-blue-action hover:bg-blue-action/90 active:scale-95 px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm transition-all cursor-pointer border border-blue-action/10"
-                              >
-                                ▸ {h.nombre}
-                              </button>
-                            );
-                          }
-
+                        // Si no tiene video pero está completada (texto plano)
+                        if (isHabilityCompleted) {
                           return (
                             <span
                               key={h.id}
-                              className="text-xs font-medium text-slate-400 bg-bg-soft1 border border-tinta/10 border-dashed px-3 py-1.5 rounded-full"
+                              className="text-xs font-semibold text-green-logro bg-[#DDF0E5] px-3 py-1.5 rounded-full flex items-center gap-1 border border-green-logro/15"
                             >
-                              {h.nombre}
+                              ✓ {h.nombre}
                             </span>
                           );
-                        })}
-                      </div>
-                    )}
+                        }
+
+                        // Habilidades sin video y no completadas
+                        return (
+                          <span
+                            key={h.id}
+                            className="text-xs font-medium text-slate-400 bg-bg-soft1 border border-tinta/10 border-dashed px-3 py-1.5 rounded-full"
+                          >
+                            {h.nombre}
+                          </span>
+                        );
+                      })}
+                    </div>
                   </div>
 
                   {/* Conector de unidades */}

@@ -2,14 +2,8 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 
-interface BalanzaProps {
-  onCorrectAction: () => void;
-  resuelto: boolean;
-  subtitulo?: string;
-}
-
 type ItemType = 'box' | 'ball';
-type Side = 'left' | 'right' | 'trash';
+type Side = 'left' | 'right' | 'table';
 
 interface Item {
   id: string;
@@ -17,68 +11,58 @@ interface Item {
   side: Side;
 }
 
-const INITIAL_ITEMS: Item[] = [
-  { id: 'box-L1', type: 'box', side: 'left' },
-  { id: 'box-L2', type: 'box', side: 'left' },
-  { id: 'ball-L1', type: 'ball', side: 'left' },
-  { id: 'ball-L2', type: 'ball', side: 'left' },
-  { id: 'ball-L3', type: 'ball', side: 'left' },
-  { id: 'ball-L4', type: 'ball', side: 'left' },
-  { id: 'ball-L5', type: 'ball', side: 'left' },
-  
-  { id: 'ball-R1', type: 'ball', side: 'right' },
-  { id: 'ball-R2', type: 'ball', side: 'right' },
-  { id: 'ball-R3', type: 'ball', side: 'right' },
-  { id: 'ball-R4', type: 'ball', side: 'right' },
-  { id: 'ball-R5', type: 'ball', side: 'right' },
-  { id: 'ball-R6', type: 'ball', side: 'right' },
-  { id: 'ball-R7', type: 'ball', side: 'right' },
-  { id: 'ball-R8', type: 'ball', side: 'right' },
-];
+type AppState = 'playing' | 'error_tilt' | 'error_not_isolated' | 'success';
 
-export default function Balanza({
-  onCorrectAction,
-  resuelto,
-  subtitulo,
-}: BalanzaProps) {
-  const [items, setItems] = useState<Item[]>(INITIAL_ITEMS);
+export default function Balanza() {
+  const [equation, setEquation] = useState({ a: 2, b: 2, c: 8, x: 3 });
+  const [items, setItems] = useState<Item[]>([]);
+  const [appState, setAppState] = useState<AppState>('playing');
+  
   const [draggedItemId, setDraggedItemId] = useState<string | null>(null);
   const [pointerPos, setPointerPos] = useState({ x: 0, y: 0 });
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+  
   const containerRef = useRef<HTMLDivElement>(null);
+
+  // Generar nueva ecuación
+  const generateEquation = () => {
+    const x = Math.floor(Math.random() * 4) + 2; // 2 to 5
+    const a = Math.floor(Math.random() * 3) + 1; // 1 to 3
+    const b = Math.floor(Math.random() * 6) + 1; // 1 to 6
+    const c = a * x + b;
+    setEquation({ a, b, c, x });
+    
+    const newItems: Item[] = [];
+    for(let i = 0; i < a; i++) newItems.push({ id: `box-L${i}-${Date.now()}`, type: 'box', side: 'left' });
+    for(let i = 0; i < b; i++) newItems.push({ id: `ball-L${i}-${Date.now()}`, type: 'ball', side: 'left' });
+    for(let i = 0; i < c; i++) newItems.push({ id: `ball-R${i}-${Date.now()}`, type: 'ball', side: 'right' });
+    setItems(newItems);
+    setAppState('playing');
+  };
+
+  useEffect(() => {
+    if (items.length === 0) {
+      generateEquation();
+    }
+  }, []);
+
+  // Calcular pesos
+  const leftWeight = items.filter(i => i.side === 'left').reduce((acc, curr) => acc + (curr.type === 'box' ? equation.x : 1), 0);
+  const rightWeight = items.filter(i => i.side === 'right').reduce((acc, curr) => acc + (curr.type === 'box' ? equation.x : 1), 0);
   
-  // Calculate weights
-  const leftWeight = items.filter(i => i.side === 'left').reduce((acc, curr) => acc + (curr.type === 'box' ? 1.5 : 1), 0);
-  const rightWeight = items.filter(i => i.side === 'right').reduce((acc, curr) => acc + (curr.type === 'box' ? 1.5 : 1), 0);
-  
-  // Diff > 0 means right is heavier (tilts right)
   const diff = rightWeight - leftWeight;
-  const rotation = Math.max(-15, Math.min(15, diff * 4)); // Max 15 degrees tilt
-  
+  const rotation = Math.max(-15, Math.min(15, diff * 4)); 
   const rad = (rotation * Math.PI) / 180;
   const leftPanY = -170 * Math.sin(rad); 
   const rightPanY = 170 * Math.sin(rad);  
 
-  useEffect(() => {
-    // Check win condition:
-    // Left: 2 boxes, 0 balls
-    // Right: 3 balls
-    // Balance: Equal
-    const leftBoxes = items.filter(i => i.side === 'left' && i.type === 'box').length;
-    const leftBalls = items.filter(i => i.side === 'left' && i.type === 'ball').length;
-    const rightBalls = items.filter(i => i.side === 'right' && i.type === 'ball').length;
-    
-    if (leftBoxes === 2 && leftBalls === 0 && rightBalls === 3 && leftWeight === rightWeight && !resuelto) {
-      onCorrectAction();
-    }
-  }, [items, leftWeight, rightWeight, resuelto, onCorrectAction]);
-
   const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>, item: Item) => {
-    if (resuelto) return;
+    if (appState === 'success') return;
     setDraggedItemId(item.id);
     setStartPos({ x: e.clientX, y: e.clientY });
     setPointerPos({ x: 0, y: 0 });
     e.currentTarget.setPointerCapture(e.pointerId);
+    if (appState !== 'playing') setAppState('playing'); // reset error states
   };
 
   const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -96,24 +80,48 @@ export default function Balanza({
 
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    
-    // Check if dropped near the bottom 60px (Trash area)
+    const relativeX = e.clientX - rect.left;
     const relativeY = e.clientY - rect.top;
-    if (relativeY > 240) {
-      // Dropped in trash
-      setItems(prev => prev.map(i => i.id === item.id ? { ...i, side: 'trash' } : i));
+    
+    // Determinar zona de drop
+    // Mesa: Y > 240
+    // Izquierda: Y < 240, X < 250
+    // Derecha: Y < 240, X >= 250
+    let targetSide: Side = 'table';
+    if (relativeY < 240) {
+      targetSide = relativeX < rect.width / 2 ? 'left' : 'right';
+    }
+
+    setItems(prev => prev.map(i => i.id === item.id ? { ...i, side: targetSide } : i));
+  };
+
+  const handleComprobar = () => {
+    if (leftWeight !== rightWeight) {
+      setAppState('error_tilt');
+      return;
+    }
+    const leftBoxes = items.filter(i => i.side === 'left' && i.type === 'box').length;
+    const rightBoxes = items.filter(i => i.side === 'right' && i.type === 'box').length;
+    const leftBalls = items.filter(i => i.side === 'left' && i.type === 'ball').length;
+    const rightBalls = items.filter(i => i.side === 'right' && i.type === 'ball').length;
+
+    // Condición de victoria: cajas aisladas en un platillo (usualmente el izquierdo), sin bolitas en ese mismo platillo
+    if ((leftBoxes > 0 && leftBalls === 0 && rightBalls > 0) || (rightBoxes > 0 && rightBalls === 0 && leftBalls > 0)) {
+      setAppState('success');
+    } else {
+      setAppState('error_not_isolated');
     }
   };
 
   const springTransition = draggedItemId ? 'none' : 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
-  const renderItem = (item: Item) => {
-    if (item.side === 'trash') return null;
-    
+  const renderItem = (item: Item, absolutePositioning: boolean = false) => {
     const isDragging = draggedItemId === item.id;
     const transform = isDragging ? `translate(${pointerPos.x}px, ${pointerPos.y}px) scale(1.2)` : 'translate(0px, 0px) scale(1)';
     const zIndex = isDragging ? 50 : 10;
     const cursor = isDragging ? 'grabbing' : 'grab';
+
+    const baseClass = absolutePositioning ? "relative" : "";
 
     if (item.type === 'box') {
       return (
@@ -123,7 +131,7 @@ export default function Balanza({
           onPointerMove={handlePointerMove}
           onPointerUp={(e) => handlePointerUp(e, item)}
           style={{ transform, zIndex, cursor, touchAction: 'none' }}
-          className="w-8 h-8 bg-blue-100 border-2 border-blue-500 rounded flex items-center justify-center font-bold text-blue-700 shadow-sm"
+          className={`${baseClass} w-8 h-8 bg-blue-100 border-2 border-blue-500 rounded flex items-center justify-center font-bold text-blue-700 shadow-sm transition-colors hover:bg-blue-200`}
         >
           x
         </div>
@@ -136,7 +144,7 @@ export default function Balanza({
           onPointerMove={handlePointerMove}
           onPointerUp={(e) => handlePointerUp(e, item)}
           style={{ transform, zIndex, cursor, touchAction: 'none' }}
-          className="w-5 h-5 bg-orange-100 border-2 border-orange-500 rounded-full flex items-center justify-center font-bold text-xs text-orange-700 shadow-sm"
+          className={`${baseClass} w-6 h-6 bg-orange-100 border-2 border-orange-500 rounded-full flex items-center justify-center font-bold text-[10px] text-orange-700 shadow-sm transition-colors hover:bg-orange-200`}
         >
           1
         </div>
@@ -146,73 +154,135 @@ export default function Balanza({
 
   const leftItems = items.filter(i => i.side === 'left');
   const rightItems = items.filter(i => i.side === 'right');
+  const tableItems = items.filter(i => i.side === 'table');
 
   return (
-    <div
-      ref={containerRef}
-      className="relative w-full max-w-[500px] h-[320px] bg-white border border-tinta/10 rounded-2xl flex flex-col items-center justify-start p-6 select-none overflow-hidden"
-    >
-      <div className="flex flex-col items-center gap-1 mb-2">
-        <span className="text-2xl font-semibold tracking-wide font-mono text-tinta">
-          2x + 5 = 8
-        </span>
-        <span className="text-xs text-slate-500 text-center px-4 h-8">
-          {subtitulo || (resuelto
-            ? '¡Ecuación resuelta! Mantuvo el equilibrio.'
-            : 'Arrastra elementos a la caneca inferior para despejar "x" manteniendo la balanza equilibrada.')}
-        </span>
-      </div>
+    <div className="flex flex-col items-center gap-6 w-full max-w-[600px] mx-auto">
+      
+      {/* Caja Principal del Simulador */}
+      <div
+        ref={containerRef}
+        className="relative w-full h-[360px] bg-white border border-tinta/10 rounded-3xl flex flex-col items-center justify-start p-6 select-none overflow-hidden shadow-sm"
+      >
+        <div className="flex flex-col items-center gap-1 mb-2">
+          <span className="text-3xl font-semibold tracking-wide font-mono text-tinta">
+            {equation.a}x + {equation.b} = {equation.c}
+          </span>
+          <span className="text-xs text-slate-500 text-center px-4 h-4">
+            Aisla las cajas 'x' en un solo platillo manteniendo el equilibrio.
+          </span>
+        </div>
 
-      {/* Estructura de la Balanza */}
-      <div className="relative w-full h-[140px] mt-2">
-        {/* Barra superior (brazo) */}
-        <div
-          style={{ transform: `translateX(-50%) rotate(${rotation}deg)`, transition: springTransition }}
-          className="absolute left-1/2 top-[12px] w-[340px] h-[6px] rounded bg-slate-800 origin-center"
-        />
+        {/* Estructura de la Balanza */}
+        <div className="relative w-full h-[150px] mt-4">
+          {/* Brazo */}
+          <div
+            style={{ transform: `translateX(-50%) rotate(${rotation}deg)`, transition: springTransition }}
+            className="absolute left-1/2 top-[12px] w-[340px] h-[8px] rounded-full bg-slate-800 origin-center"
+          />
 
-        {/* Eje central */}
-        <div className="absolute left-1/2 top-0 -translate-x-1/2 w-4 h-4 rounded-full bg-blue-action border-2 border-white shadow z-10" />
-        <div className="absolute left-1/2 top-[15px] -translate-x-1/2 w-[12px] h-[110px] bg-slate-800 rounded-t" />
-        <div className="absolute left-1/2 top-[120px] -translate-x-1/2 w-[120px] h-[10px] bg-slate-800 rounded" />
+          {/* Eje central */}
+          <div className="absolute left-1/2 top-[-2px] -translate-x-1/2 w-5 h-5 rounded-full bg-blue-action border-[3px] border-white shadow-md z-10" />
+          <div className="absolute left-1/2 top-[15px] -translate-x-1/2 w-[14px] h-[130px] bg-slate-800 rounded-t" />
+          <div className="absolute left-1/2 top-[140px] -translate-x-1/2 w-[140px] h-[12px] bg-slate-800 rounded-full shadow-sm" />
 
-        {/* Platillo Izquierdo */}
-        <div
-          style={{ transform: `translateY(${leftPanY}px)`, transition: springTransition }}
-          className="absolute left-[20px] top-[15px] flex flex-col items-center"
-        >
-          <div className="w-[1.5px] h-[40px] bg-slate-400" />
-          <div className="w-[120px] min-h-[50px] rounded-b-2xl bg-slate-100 border-2 border-slate-400 flex flex-wrap content-end justify-center gap-1 p-2 pb-3 shadow-inner">
-            {leftItems.map(item => renderItem(item))}
+          {/* Platillo Izquierdo */}
+          <div
+            style={{ transform: `translateY(${leftPanY}px)`, transition: springTransition }}
+            className="absolute left-[30px] top-[15px] flex flex-col items-center"
+          >
+            <div className="w-[2px] h-[50px] bg-slate-400" />
+            <div className="w-[130px] min-h-[60px] rounded-b-3xl bg-slate-50 border-[3px] border-slate-300 flex flex-wrap content-end justify-center gap-1.5 p-3 pb-4 shadow-inner">
+              {leftItems.map(item => renderItem(item))}
+            </div>
+            <div className={`mt-2 text-xs font-bold font-mono transition-colors ${leftWeight === rightWeight ? 'text-green-600' : 'text-red-500'}`}>
+              Peso: {leftWeight}
+            </div>
           </div>
-          {/* Indicador visual de peso */}
-          <div className={`mt-1 text-xs font-bold font-mono transition-colors ${leftWeight === rightWeight ? 'text-green-600' : 'text-red-500'}`}>
-            Peso: {leftWeight}
+
+          {/* Platillo Derecho */}
+          <div
+            style={{ transform: `translateY(${rightPanY}px)`, transition: springTransition }}
+            className="absolute right-[30px] top-[15px] flex flex-col items-center"
+          >
+            <div className="w-[2px] h-[50px] bg-slate-400" />
+            <div className="w-[130px] min-h-[60px] rounded-b-3xl bg-slate-50 border-[3px] border-slate-300 flex flex-wrap content-end justify-center gap-1.5 p-3 pb-4 shadow-inner">
+              {rightItems.map(item => renderItem(item))}
+            </div>
+            <div className={`mt-2 text-xs font-bold font-mono transition-colors ${leftWeight === rightWeight ? 'text-green-600' : 'text-red-500'}`}>
+              Peso: {rightWeight}
+            </div>
           </div>
         </div>
 
-        {/* Platillo Derecho */}
-        <div
-          style={{ transform: `translateY(${rightPanY}px)`, transition: springTransition }}
-          className="absolute right-[20px] top-[15px] flex flex-col items-center"
-        >
-          <div className="w-[1.5px] h-[40px] bg-slate-400" />
-          <div className="w-[120px] min-h-[50px] rounded-b-2xl bg-slate-100 border-2 border-slate-400 flex flex-wrap content-end justify-center gap-1 p-2 pb-3 shadow-inner">
-            {rightItems.map(item => renderItem(item))}
-          </div>
-          {/* Indicador visual de peso */}
-          <div className={`mt-1 text-xs font-bold font-mono transition-colors ${leftWeight === rightWeight ? 'text-green-600' : 'text-red-500'}`}>
-            Peso: {rightWeight}
+        {/* Zona de Mesa (Abajo) */}
+        <div className="absolute bottom-0 left-0 w-full h-[90px] bg-yellow-50/60 border-t-2 border-yellow-100 flex flex-col items-center justify-start p-2">
+          <span className="text-[10px] font-bold text-yellow-600 mb-1 uppercase tracking-wider">Mesa de Trabajo</span>
+          <div className="flex flex-wrap items-center justify-center gap-2 w-full px-4">
+            {tableItems.map(item => renderItem(item, true))}
+            {tableItems.length === 0 && <span className="text-xs text-yellow-500/50 italic">Arrastra piezas aquí</span>}
           </div>
         </div>
       </div>
 
-      {/* Zona de Basura (Caneca) */}
-      <div className="absolute bottom-0 left-0 w-full h-[60px] bg-red-50/50 border-t border-red-100 flex items-center justify-center gap-2">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-red-400">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-        </svg>
-        <span className="text-sm font-semibold text-red-400">Caneca (arrastra aquí para eliminar)</span>
+      {/* Panel de Control y Feedback */}
+      <div className="w-full flex flex-col gap-4">
+        {appState === 'error_tilt' && (
+          <div className="bg-[#FDF1DC] border border-amber-revisar/40 rounded-2xl p-4 flex gap-3 text-left animate-fadeIn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#8A5B10] flex-none">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-bold text-[#8A5B10]">La balanza está inclinada</p>
+              <p className="text-xs text-[#7A5310] leading-relaxed">Recuerda: lo que quitas de un lado, debes quitarlo exactamente igual del otro lado para mantener el equilibrio.</p>
+            </div>
+          </div>
+        )}
+
+        {appState === 'error_not_isolated' && (
+          <div className="bg-blue-50 border border-blue-200 rounded-2xl p-4 flex gap-3 text-left animate-fadeIn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-blue-600 flex-none">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-bold text-blue-700">Aún no hemos terminado</p>
+              <p className="text-xs text-blue-600 leading-relaxed">La balanza está equilibrada, ¡bien! Pero el objetivo es aislar las cajas (x) solas en un platillo, sin bolitas que las acompañen.</p>
+            </div>
+          </div>
+        )}
+
+        {appState === 'success' && (
+          <div className="bg-[#DDF0E5] border border-green-logro/30 rounded-2xl p-4 flex gap-3 text-left animate-fadeIn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-green-logro flex-none">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div className="flex flex-col gap-1">
+              <p className="text-sm font-bold text-green-logro">¡Excelente trabajo!</p>
+              <p className="text-xs text-[#1F6B44] leading-relaxed">Has despejado la variable manteniendo la ecuación perfectamente equilibrada.</p>
+            </div>
+          </div>
+        )}
+
+        <div className="flex gap-3">
+          {appState === 'success' ? (
+            <button
+              onClick={generateEquation}
+              className="flex-1 bg-green-logro hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"
+            >
+              <span>Siguiente Reto</span>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+              </svg>
+            </button>
+          ) : (
+            <button
+              onClick={handleComprobar}
+              className="flex-1 bg-blue-action hover:bg-blue-action/90 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-all active:scale-95"
+            >
+              Comprobar
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

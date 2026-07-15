@@ -202,19 +202,16 @@ export default function RetoPage({ params }: PageProps) {
 
       <main className="flex-1 max-w-7xl mx-auto px-6 py-8 w-full grid md:grid-cols-12 gap-8 items-start">
         
-        {/* Lado izquierdo: Balanza (7 columnas) - Solo se muestra para retos de tipo balanza */}
+        {/* Lado izquierdo o Full Width: Balanza */}
         {reto.tipo === 'balanza' && (
-          <div className="md:col-span-7 flex flex-col items-center gap-4 w-full">
-            <Balanza
-              onCorrectAction={handleCorrectAction}
-              resuelto={resuelto}
-              subtitulo={resuelto ? (reto.subtituloResuelto || '¡Eso es! Despejaste la ecuación manteniendo el equilibrio.') : undefined}
-            />
+          <div className="md:col-span-12 flex flex-col items-center gap-4 w-full">
+            <Balanza />
           </div>
         )}
 
-        {/* Lado derecho: Pregunta, Opciones y Feedback (5 columnas si hay balanza, 8 columnas centradas en una tarjeta si es de opción múltiple de texto) */}
-        <div className={`${reto.tipo === 'balanza' ? 'md:col-span-5' : 'md:col-span-8 md:col-start-3 lg:col-span-6 lg:col-start-4 bg-white p-6 md:p-8 border border-tinta/10 rounded-2xl shadow-sm'} flex flex-col gap-4`}>
+        {/* Lado derecho: Pregunta, Opciones y Feedback (Solo para multiple-choice) */}
+        {reto.tipo !== 'balanza' && (
+          <div className="md:col-span-8 md:col-start-3 lg:col-span-6 lg:col-start-4 bg-white p-6 md:p-8 border border-tinta/10 rounded-2xl shadow-sm flex flex-col gap-4">
           <span className="text-base md:text-lg font-bold text-tinta leading-snug">
             {reto.pregunta}
           </span>
@@ -332,11 +329,11 @@ export default function RetoPage({ params }: PageProps) {
 
           {!resuelto && (
             <p className="text-[10px] text-slate-400 text-center">
-              Saltar no descuenta puntos. Este reto volverá más adelante cuando estés listo.
+              Saltar no descuenta puntos. Este reto volverá más adelante cuando
             </p>
           )}
         </div>
-
+        )}
       </main>
     </div>
   );
