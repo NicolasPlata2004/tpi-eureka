@@ -487,15 +487,36 @@
     "lec-pitagoras": [
       {
         "id": "reto-pitagoras-1",
-        "tipo": "areas",
-        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
-        "expresion": "a^2 + b^2 = c^2",
-        "modelo": "pitagoras",
-        "piezas": [
-          "a^2",
-          "b^2"
-        ],
-        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
+        "tipo": "pitagoras",
+        "pregunta": "Demuestra el Teorema de Pitágoras encontrando el valor de la hipotenusa c",
+        "valores": {
+          "a": 3,
+          "b": 4,
+          "c": 5
+        },
+        "pista": "Usa la fórmula: c = √ (a² + b²). En este caso: c = √ (9 + 16)."
+      },
+      {
+        "id": "reto-pitagoras-2",
+        "tipo": "pitagoras",
+        "pregunta": "Demuestra el Teorema de Pitágoras encontrando el valor de la hipotenusa c",
+        "valores": {
+          "a": 6,
+          "b": 8,
+          "c": 10
+        },
+        "pista": "Usa la fórmula: c = √ (a² + b²). En este caso: c = √ (36 + 64)."
+      },
+      {
+        "id": "reto-pitagoras-3",
+        "tipo": "pitagoras",
+        "pregunta": "Demuestra el Teorema de Pitágoras encontrando el valor de la hipotenusa c",
+        "valores": {
+          "a": 5,
+          "b": 12,
+          "c": 13
+        },
+        "pista": "Usa la fórmula: c = √ (a² + b²). En este caso: c = √ (25 + 144)."
       }
     ]
   },
