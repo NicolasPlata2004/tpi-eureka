@@ -62,6 +62,10 @@ export default function LeccionPage({ params }: PageProps) {
     const audio = audioRef.current;
     if (!video || !audio) return;
 
+    // Initial sync
+    audio.volume = video.volume;
+    audio.muted = video.muted;
+
     const handlePlay = () => {
       audio.play().catch((err) => console.log('Audio autoplay blocked or failed:', err));
     };
@@ -70,14 +74,21 @@ export default function LeccionPage({ params }: PageProps) {
       audio.pause();
     };
 
+    const handleVolumeChange = () => {
+      audio.volume = video.volume;
+      audio.muted = video.muted;
+    };
+
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
     video.addEventListener('ended', handlePause);
+    video.addEventListener('volumechange', handleVolumeChange);
 
     return () => {
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
       video.removeEventListener('ended', handlePause);
+      video.removeEventListener('volumechange', handleVolumeChange);
     };
   }, [loading, leccion]);
 

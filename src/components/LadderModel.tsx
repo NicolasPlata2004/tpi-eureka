@@ -325,10 +325,9 @@ export default function LadderModel({ reto, onCorrectAction, onErrorAction }: La
             <text
               x={charX}
               y={charY}
-              className="text-2xl select-none"
+              fill="#ffffff"
+              className="text-3xl select-none"
               textAnchor="middle"
-              transform={`rotate(${charRotation} ${charX} ${charY})`}
-              style={{ transition: 'transform 0.1s ease-out' }}
             >
               {animationState === 'ladder_slip' ? '💥' : animationState === 'climbing_success' ? '🧗' : '🏃'}
             </text>
