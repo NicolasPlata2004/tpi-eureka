@@ -1,8 +1,14 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
+
+declare global {
+  interface Window {
+    watchedVideos?: string[];
+  }
+}
 
 interface User {
   id: string;
@@ -51,7 +57,13 @@ export default function Dashboard() {
   const [achievements, setAchievements] = useState<Achievement[]>([]);
   const [nextChallenge, setNextChallenge] = useState<SiguienteReto | null>(null);
   const [loading, setLoading] = useState(true);
+  const [watchedVideos, setWatchedVideos] = useState<string[]>([]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.watchedVideos) {
+      setWatchedVideos([...window.watchedVideos]);
+    }
+  }, []);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -105,6 +117,45 @@ export default function Dashboard() {
     { label: 'D', activa: user ? user.racha >= 7 : false }
   ];
 
+  const processedUnits = useMemo(() => {
+    return units.map(unit => {
+      // Recalculate habilidades completeness based on watchedVideos
+      const updatedHabilidades = unit.habilidades.map(h => {
+        const isWatched = h.leccionId && watchedVideos.includes(h.leccionId);
+        return {
+          ...h,
+          completa: h.completa || !!isWatched
+        };
+      });
+
+      const completedCount = updatedHabilidades.filter(h => h.completa).length;
+      
+      // If this unit has any completed (or watched) habilidades, or was not blocked, it becomes active
+      const hasWatchedAny = updatedHabilidades.some(h => h.leccionId && watchedVideos.includes(h.leccionId));
+      
+      let estado = unit.estado;
+      let progreso = unit.progreso;
+      
+      if (hasWatchedAny && unit.estado === 'bloqueada') {
+        estado = 'en-progreso';
+      }
+      
+      if (estado !== 'bloqueada') {
+        progreso = Math.round((completedCount / updatedHabilidades.length) * 100);
+        if (progreso === 100) {
+          estado = 'completa';
+        }
+      }
+
+      return {
+        ...unit,
+        habilidades: updatedHabilidades,
+        progreso,
+        estado
+      };
+    });
+  }, [units, watchedVideos]);
+
   return (
     <div className="min-h-screen bg-bg-soft1 flex flex-col select-none">
       <Header />
@@ -123,7 +174,7 @@ export default function Dashboard() {
           </div>
 
           <div className="flex flex-col gap-6 relative">
-            {units.map((unit, index) => {
+            {processedUnits.map((unit, index) => {
               const isU1 = unit.id === 'u1';
               const isU2 = unit.id === 'u2';
               const isU3 = unit.id === 'u3';

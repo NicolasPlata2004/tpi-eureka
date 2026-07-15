@@ -4,6 +4,12 @@ import React, { useEffect, useState, use } from 'react';
 import { useRouter } from 'next/navigation';
 import Header from '@/components/Header';
 
+declare global {
+  interface Window {
+    watchedVideos?: string[];
+  }
+}
+
 interface Leccion {
   id: string;
   titulo: string;
@@ -47,6 +53,13 @@ export default function LeccionPage({ params }: PageProps) {
         setLeccion(data.leccion);
         setRetos(data.retos);
         setNextRetoId(data.nextRetoId || (data.retos.length > 0 ? data.retos[0].id : null));
+        
+        if (typeof window !== 'undefined') {
+          window.watchedVideos = window.watchedVideos || [];
+          if (!window.watchedVideos.includes(data.leccion.id)) {
+            window.watchedVideos.push(data.leccion.id);
+          }
+        }
       } catch (err) {
         console.error('Error fetching lesson:', err);
       } finally {
