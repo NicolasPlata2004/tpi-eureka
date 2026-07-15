@@ -31,10 +31,9 @@ export default function LadderModel({ reto, onCorrectAction, onErrorAction }: La
   const topWallY = groundY - b * scale;
 
   // Animate values
-  const [t, setT] = useState(0); // position along ladder (0 to 1)
+  const [t, setT] = useState(0); // progress (0 to 1) for active animation phase
   const [topY, setTopY] = useState(topWallY);
   const [topX, setTopX] = useState(wallX);
-  const [charYOffset, setCharYOffset] = useState(-15);
   const [charRotation, setCharRotation] = useState(0);
 
   useEffect(() => {
@@ -45,7 +44,6 @@ export default function LadderModel({ reto, onCorrectAction, onErrorAction }: La
     setT(0);
     setTopY(topWallY);
     setTopX(wallX);
-    setCharYOffset(-15);
     setCharRotation(0);
   }, [reto]);
 
@@ -95,8 +93,9 @@ export default function LadderModel({ reto, onCorrectAction, onErrorAction }: La
         } else {
           // Ladder slips!
           setAnimationState('ladder_slip');
+          setT(0); // Reset t to 0 to use it as progress for the falling phase
           let slipStart: number | null = null;
-          const durationSlip = 600;
+          const durationSlip = 650;
 
           const animateSlip = (slipTimestamp: number) => {
             if (!slipStart) slipStart = slipTimestamp;
@@ -105,11 +104,10 @@ export default function LadderModel({ reto, onCorrectAction, onErrorAction }: La
 
             // Ladder top falls to the ground
             setTopY(topWallY + (groundY - topWallY) * slipProgress);
-            setTopX(wallX - (a * scale * 0.3) * slipProgress); // slide left slightly
+            setTopX(wallX - (a * scale * 0.35) * slipProgress); // slide left slightly
 
-            // Character falls off ladder to the ground
-            setT(0.5 - 0.5 * slipProgress);
-            setCharYOffset(-15 + (groundY - (topWallY + (groundY - topWallY) * 0.5)) * slipProgress);
+            // Character falling progress (0 to 1)
+            setT(slipProgress);
             setCharRotation(180 * slipProgress);
 
             if (slipProgress < 1) {
@@ -129,9 +127,22 @@ export default function LadderModel({ reto, onCorrectAction, onErrorAction }: La
   const currentTopX = topX;
   const currentTopY = topY;
 
-  // Calculate character position
-  const charX = baseLineX + t * (currentTopX - baseLineX);
-  const charY = groundY + t * (currentTopY - groundY) + charYOffset;
+  // Calculate character position explicitly based on active phase
+  let charX = baseLineX;
+  let charY = groundY - 15;
+
+  if (animationState === 'climbing_success' || animationState === 'climbing_fail') {
+    charX = baseLineX + t * (currentTopX - baseLineX);
+    charY = groundY + t * (currentTopY - groundY) - 15;
+  } else if (animationState === 'ladder_slip') {
+    // Starts from mid ladder position
+    const startX = baseLineX + 0.5 * (wallX - baseLineX);
+    const startY = groundY + 0.5 * (topWallY - groundY) - 15;
+    
+    // Falls straight down to groundY - 15
+    charX = startX;
+    charY = startY + (groundY - 15 - startY) * t;
+  }
 
   // Ladder rungs (10 rungs evenly spaced)
   const rungs = [];
@@ -177,21 +188,11 @@ export default function LadderModel({ reto, onCorrectAction, onErrorAction }: La
               type="number"
               value={answer}
               onChange={(e) => {
-                if (animationState !== 'idle') return;
                 setAnswer(e.target.value);
-                if (appState === 'error') {
-                  setAppState('playing');
-                  setAnimationState('idle');
-                  setT(0);
-                  setTopY(topWallY);
-                  setTopX(wallX);
-                  setCharYOffset(-15);
-                  setCharRotation(0);
-                }
               }}
               placeholder="?"
               className="w-20 h-10 text-center font-bold text-lg rounded-xl border-2 border-blue-action/30 focus:border-blue-action focus:outline-none transition-all"
-              disabled={appState === 'success' || animationState !== 'idle'}
+              disabled={appState === 'success' || appState === 'error' || animationState !== 'idle'}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') handleComprobar();
               }}
@@ -355,6 +356,22 @@ export default function LadderModel({ reto, onCorrectAction, onErrorAction }: La
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
               </svg>
+            </button>
+          ) : appState === 'error' && animationState === 'ladder_slip' && t >= 1 ? (
+            <button
+              onClick={() => {
+                // Reset all states back to playing
+                setAppState('playing');
+                setAnimationState('idle');
+                setT(0);
+                setTopY(topWallY);
+                setTopX(wallX);
+                setCharRotation(0);
+                setAnswer('');
+              }}
+              className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"
+            >
+              <span>Intentar de nuevo</span>
             </button>
           ) : (
             <button

@@ -31,6 +31,10 @@ export default function LeccionPage({ params }: PageProps) {
   const [nextRetoId, setNextRetoId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // References for synchronized audio playback
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+  const audioRef = React.useRef<HTMLAudioElement>(null);
+
   useEffect(() => {
     async function fetchLeccion() {
       try {
@@ -51,6 +55,31 @@ export default function LeccionPage({ params }: PageProps) {
     }
     fetchLeccion();
   }, [id, router]);
+
+  // Synchronize audio playback with video events
+  useEffect(() => {
+    const video = videoRef.current;
+    const audio = audioRef.current;
+    if (!video || !audio) return;
+
+    const handlePlay = () => {
+      audio.play().catch((err) => console.log('Audio autoplay blocked or failed:', err));
+    };
+
+    const handlePause = () => {
+      audio.pause();
+    };
+
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+    video.addEventListener('ended', handlePause);
+
+    return () => {
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+      video.removeEventListener('ended', handlePause);
+    };
+  }, [loading, leccion]);
 
   if (loading) {
     return (
@@ -100,11 +129,15 @@ export default function LeccionPage({ params }: PageProps) {
       <main className="flex-1 max-w-7xl mx-auto px-6 py-8 w-full grid md:grid-cols-12 gap-8 items-start">
         
         {/* Lado izquierdo: Reproductor de Video Manim (8 columnas) */}
-        <div className="md:col-span-8 flex flex-col bg-tinta rounded-2xl shadow-md overflow-hidden relative border border-white/5">
+         <div className="md:col-span-8 flex flex-col bg-tinta rounded-2xl shadow-md overflow-hidden relative border border-white/5">
+          {/* Audio element for music track */}
+          <audio ref={audioRef} src="/audio/music.mpeg" loop />
+
           {/* Contenedor del video */}
           <div className="aspect-video w-full relative flex flex-col items-center justify-center bg-black">
             {leccion.videoUrl ? (
               <video
+                ref={videoRef}
                 src={leccion.videoUrl}
                 controls
                 className="w-full h-full object-contain"
