@@ -238,7 +238,7 @@ export default function PitagorasModel({ reto, onCorrectAction, onErrorAction }:
               className="fill-green-400 font-bold text-xs font-mono"
               textAnchor="middle"
             >
-              c² = {c2}
+              c²
             </text>
 
             {/* 5. Animated Dots */}

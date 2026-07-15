@@ -225,7 +225,6 @@ export default function Balanza({ reto, onCorrectAction, onErrorAction, resuelto
           <div className="absolute left-1/2 top-[15px] -translate-x-1/2 w-[14px] h-[130px] bg-slate-800 rounded-t" />
           <div className="absolute left-1/2 top-[140px] -translate-x-1/2 w-[140px] h-[12px] bg-slate-800 rounded-full shadow-sm" />
 
-          {/* Platillo Izquierdo */}
           <div
             style={{ transform: `translateY(${leftPanY}px)`, transition: springTransition }}
             className="absolute left-[30px] top-[15px] flex flex-col items-center"
@@ -234,12 +233,8 @@ export default function Balanza({ reto, onCorrectAction, onErrorAction, resuelto
             <div className="w-[130px] min-h-[60px] rounded-b-3xl bg-slate-50 border-[3px] border-slate-300 flex flex-wrap content-end justify-center gap-1.5 p-3 pb-4 shadow-inner">
               {leftItems.map(item => renderItem(item))}
             </div>
-            <div className={`mt-2 text-xs font-bold font-mono transition-colors ${leftWeight === rightWeight ? 'text-green-600' : 'text-red-500'}`}>
-              Peso: {leftWeight}
-            </div>
           </div>
 
-          {/* Platillo Derecho */}
           <div
             style={{ transform: `translateY(${rightPanY}px)`, transition: springTransition }}
             className="absolute right-[30px] top-[15px] flex flex-col items-center"
@@ -247,9 +242,6 @@ export default function Balanza({ reto, onCorrectAction, onErrorAction, resuelto
             <div className="w-[2px] h-[50px] bg-slate-400" />
             <div className="w-[130px] min-h-[60px] rounded-b-3xl bg-slate-50 border-[3px] border-slate-300 flex flex-wrap content-end justify-center gap-1.5 p-3 pb-4 shadow-inner">
               {rightItems.map(item => renderItem(item))}
-            </div>
-            <div className={`mt-2 text-xs font-bold font-mono transition-colors ${leftWeight === rightWeight ? 'text-green-600' : 'text-red-500'}`}>
-              Peso: {rightWeight}
             </div>
           </div>
         </div>
