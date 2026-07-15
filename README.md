@@ -47,8 +47,19 @@ Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el 
 
 ## Cómo Contribuir (y ver los cambios en Vercel)
 
-Si quieres ayudar a mejorar Eureka o probar cambios en el código, el proceso es muy sencillo gracias a nuestra integración continua con Vercel.
+Si quieres ayudar a mejorar Eureka o probar cambios en el código, el proceso es muy sencillo gracias a nuestra integración continua con Vercel. 
 
+Dependiendo de si eres un colaborador externo o miembro directo del equipo, el flujo cambia ligeramente:
+
+### Opción A: Eres Colaborador Directo del Repositorio
+Si Nicolás ya te agregó como colaborador en GitHub:
+1. **Clona el repositorio**: `git clone https://github.com/NicolasPlata2004/tpi-eureka.git`
+2. **Crea una nueva rama**: No trabajes directo en `main`. Crea una rama local para tus cambios (ej. `git checkout -b mejora-interfaz`).
+3. **Sube tus cambios y abre un Pull Request (PR)**: Haz un `git push origin mejora-interfaz` y ve a GitHub para abrir el Pull Request hacia la rama `main`.
+4. **Visualiza tus cambios en Vercel**: El bot de Vercel comentará en tu PR con un enlace de "Preview Deployment". Úsalo para probar tus cambios.
+5. **Merge a Producción**: Una vez aprobado, haz el merge a `main` y Vercel lo mandará directo a la web principal.
+
+### Opción B: Eres un Contribuidor Externo (Sin acceso de escritura)
 1. **Haz un Fork del repositorio**: Crea una copia del proyecto en tu propia cuenta de GitHub.
 2. **Crea una nueva rama**: Trabaja tus cambios en una rama local (ej. `git checkout -b mejora-interfaz`).
 3. **Sube tus cambios y abre un Pull Request (PR)**: Cuando estés listo, haz un push a tu fork y abre un Pull Request hacia la rama `main` de este repositorio original.
