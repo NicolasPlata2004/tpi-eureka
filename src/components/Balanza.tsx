@@ -14,11 +14,13 @@ interface Item {
 type AppState = 'playing' | 'error_tilt' | 'error_mixed' | 'error_not_isolated' | 'success';
 
 interface BalanzaProps {
+  reto: any;
   onCorrectAction?: () => void;
+  onErrorAction?: () => void;
   resuelto?: boolean;
 }
 
-export default function Balanza({ onCorrectAction, resuelto }: BalanzaProps) {
+export default function Balanza({ reto, onCorrectAction, onErrorAction, resuelto }: BalanzaProps) {
   const [equation, setEquation] = useState({ a: 2, b: 2, c: 8, x: 3 });
   const [items, setItems] = useState<Item[]>([]);
   const [appState, setAppState] = useState<AppState>('playing');
@@ -46,14 +48,40 @@ export default function Balanza({ onCorrectAction, resuelto }: BalanzaProps) {
   };
 
   useEffect(() => {
-    if (items.length === 0) {
+    // Inicializar items según el reto
+    if (reto) {
+      let currentId = 0;
+      const initialItems: Item[] = [];
+      const leftTerminos = reto.platilloIzquierdo?.terminos || [];
+      leftTerminos.forEach((t: string) => {
+        initialItems.push({
+          id: `item-${currentId++}`,
+          type: t === 'x' ? 'box' : 'ball',
+          side: 'left'
+        });
+      });
+      const rightValor = reto.platilloDerecho?.valor || 0;
+      for (let i = 0; i < rightValor; i++) {
+        initialItems.push({
+          id: `item-${currentId++}`,
+          type: 'ball',
+          side: 'right'
+        });
+      }
+      setItems(initialItems);
+      setAppState('playing');
+    } else if (items.length === 0) {
       generateEquation();
     }
-  }, []);
+  }, [reto]);
 
   // Calcular pesos
-  const leftWeight = items.filter(i => i.side === 'left').reduce((acc, curr) => acc + (curr.type === 'box' ? equation.x : 1), 0);
-  const rightWeight = items.filter(i => i.side === 'right').reduce((acc, curr) => acc + (curr.type === 'box' ? equation.x : 1), 0);
+  const xValue = reto 
+    ? (reto.platilloDerecho?.valor - (reto.platilloIzquierdo?.terminos.filter((t: string) => t === '1').length || 0)) / (reto.platilloIzquierdo?.terminos.filter((t: string) => t === 'x').length || 1)
+    : equation.x;
+
+  const leftWeight = items.filter(i => i.side === 'left').reduce((acc, curr) => acc + (curr.type === 'box' ? xValue : 1), 0);
+  const rightWeight = items.filter(i => i.side === 'right').reduce((acc, curr) => acc + (curr.type === 'box' ? xValue : 1), 0);
   
   const diff = rightWeight - leftWeight;
   const rotation = Math.max(-15, Math.min(15, diff * 4)); 
@@ -103,6 +131,7 @@ export default function Balanza({ onCorrectAction, resuelto }: BalanzaProps) {
   const handleComprobar = () => {
     if (leftWeight !== rightWeight) {
       setAppState('error_tilt');
+      if (onErrorAction) onErrorAction();
       return;
     }
     const leftBoxes = items.filter(i => i.side === 'left' && i.type === 'box').length;
@@ -178,11 +207,9 @@ export default function Balanza({ onCorrectAction, resuelto }: BalanzaProps) {
       >
         <div className="flex flex-col items-center gap-1 mb-2">
           <span className="text-3xl font-semibold tracking-wide font-mono text-tinta">
-            {equation.a}x + {equation.b} = {equation.c}
+            {reto?.ecuacionOriginal || `${equation.a}x + ${equation.b} = ${equation.c}`}
           </span>
-          <span className="text-xs text-slate-500 text-center px-4 h-4">
-            Aisla las cajas 'x' en un solo platillo manteniendo el equilibrio.
-          </span>
+          <span className="text-sm font-medium text-slate-500">Aislar a 'x' en un lado</span>
         </div>
 
         {/* Estructura de la Balanza */}
@@ -291,16 +318,11 @@ export default function Balanza({ onCorrectAction, resuelto }: BalanzaProps) {
           {appState === 'success' || resuelto ? (
             <button
               onClick={() => {
-                if (solvedCount >= 2 && onCorrectAction) {
-                  onCorrectAction();
-                } else {
-                  setSolvedCount(prev => prev + 1);
-                  generateEquation();
-                }
+                if (onCorrectAction) onCorrectAction();
               }}
               className="flex-1 bg-green-logro hover:bg-green-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2"
             >
-              <span>{solvedCount >= 2 ? 'Terminar Reto' : 'Siguiente Ecuación'}</span>
+              <span>Siguiente Reto</span>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
               </svg>

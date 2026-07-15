@@ -9,24 +9,14 @@ export async function GET(
     const { id } = await params;
     const db = getDb();
     
-    let foundReto = null;
-    let foundLeccionId = '';
+    let retos = [];
+    let foundLeccionId = id; // Assuming id IS the leccionId now
     let foundHabilidadId = '';
 
-    // Buscar el reto en la base de datos por su ID en todas las lecciones
-    for (const [leccionId, retosList] of Object.entries(db.retos)) {
-      if (Array.isArray(retosList)) {
-        const reto = retosList.find((r: any) => r.id === id);
-        if (reto) {
-          foundReto = reto;
-          foundLeccionId = leccionId;
-          break;
-        }
-      }
-    }
-
-    if (!foundReto) {
-      return NextResponse.json({ error: 'Reto no encontrado' }, { status: 404 });
+    if (db.retos[foundLeccionId]) {
+      retos = db.retos[foundLeccionId];
+    } else {
+      return NextResponse.json({ error: 'Lección o retos no encontrados' }, { status: 404 });
     }
 
     // Buscar la habilidadId correspondiente a esa lección en las unidades
@@ -41,7 +31,7 @@ export async function GET(
     }
 
     return NextResponse.json({
-      reto: foundReto,
+      retos, // Return the whole array
       leccionId: foundLeccionId,
       habilidadId: foundHabilidadId
     });

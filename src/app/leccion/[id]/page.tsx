@@ -31,12 +31,6 @@ export default function LeccionPage({ params }: PageProps) {
   const [nextRetoId, setNextRetoId] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Estados del reproductor de video
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [speed, setSpeed] = useState<1 | 1.5>(1);
-  const [showCC, setShowCC] = useState(true);
-
   useEffect(() => {
     async function fetchLeccion() {
       try {
@@ -58,23 +52,6 @@ export default function LeccionPage({ params }: PageProps) {
     fetchLeccion();
   }, [id, router]);
 
-  // Simulación de progreso de video
-  useEffect(() => {
-    let interval: NodeJS.Timeout;
-    if (isPlaying) {
-      interval = setInterval(() => {
-        setProgress((prev) => {
-          if (prev >= 100) {
-            setIsPlaying(false);
-            return 100;
-          }
-          return prev + (speed === 1.5 ? 1.5 : 1);
-        });
-      }, 500);
-    }
-    return () => clearInterval(interval);
-  }, [isPlaying, speed]);
-
   if (loading) {
     return (
       <div className="min-h-screen bg-bg-soft1 flex flex-col">
@@ -91,23 +68,8 @@ export default function LeccionPage({ params }: PageProps) {
 
   if (!leccion) return null;
 
-  // Formatear tiempo de simulación
-  const totalSegundos = 340; // 5:40
-  const segundosActuales = Math.floor((progress / 100) * totalSegundos);
-  const formatTime = (sec: number) => {
-    const mins = Math.floor(sec / 60);
-    const secs = sec % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-  };
-
   const handleIrReto = () => {
-    if (nextRetoId) {
-      router.push(`/reto/${nextRetoId}`);
-    } else if (retos.length > 0) {
-      router.push(`/reto/${retos[0].id}`);
-    } else {
-      router.push('/dashboard');
-    }
+    router.push(`/reto/${leccion.id}`);
   };
 
   return (
@@ -132,15 +94,6 @@ export default function LeccionPage({ params }: PageProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="w-32 h-2 bg-bg-soft1 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-blue-action transition-all duration-300"
-                style={{ width: `${progress}%` }} 
-              />
-            </div>
-            <span className="text-[11px] font-bold text-slate-500">{Math.round(progress)}%</span>
-          </div>
         </div>
       </div>
 
@@ -161,57 +114,6 @@ export default function LeccionPage({ params }: PageProps) {
             ) : (
               <div className="text-slate-500 font-mono text-sm">No se encontró video para esta lección</div>
             )}
-          </div>
-
-          {/* Controles de reproducción */}
-          <div className="flex items-center gap-4 px-5 py-3.5 bg-slate-900 border-t border-white/5 select-none">
-            {/* Play/Pause */}
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="w-10 h-10 rounded-full bg-white text-tinta flex items-center justify-center hover:scale-105 active:scale-95 transition-all shadow-md cursor-pointer flex-none"
-            >
-              {isPlaying ? (
-                <div className="flex gap-1">
-                  <div className="w-1 h-3.5 bg-tinta rounded-sm" />
-                  <div className="w-1 h-3.5 bg-tinta rounded-sm" />
-                </div>
-              ) : (
-                <div className="w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[10px] border-l-tinta ml-0.5" />
-              )}
-            </button>
-
-            {/* Barra de progreso */}
-            <div className="flex-1 h-2 rounded-full bg-white/15 overflow-hidden relative cursor-pointer group">
-              <div 
-                className="h-full bg-blue-action group-hover:bg-blue-action/80 transition-all"
-                style={{ width: `${progress}%` }}
-              />
-            </div>
-
-            {/* Tiempo */}
-            <span className="text-xs text-slate-400 font-mono">
-              {formatTime(segundosActuales)} / {leccion.duracion}
-            </span>
-
-            {/* Subtítulos CC Toggle */}
-            <button
-              onClick={() => setShowCC(!showCC)}
-              className={`text-[10px] font-bold border rounded px-2 py-0.5 transition-all cursor-pointer ${
-                showCC 
-                  ? 'border-blue-action bg-blue-action/10 text-blue-action' 
-                  : 'border-white/20 text-slate-400 hover:border-white/40'
-              }`}
-            >
-              CC
-            </button>
-
-            {/* Velocidad de reproducción */}
-            <button
-              onClick={() => setSpeed(speed === 1 ? 1.5 : 1)}
-              className="text-[10px] font-bold border border-white/20 hover:border-white/40 text-slate-300 rounded px-2 py-0.5 cursor-pointer"
-            >
-              {speed}x
-            </button>
           </div>
         </div>
 

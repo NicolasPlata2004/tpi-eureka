@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lexend, Spline_Sans_Mono } from "next/font/google";
 import "./globals.css";
+import "katex/dist/katex.min.css";
 
 const lexend = Lexend({
   variable: "--font-lexend",

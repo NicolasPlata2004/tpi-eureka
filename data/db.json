@@ -255,145 +255,399 @@
     "lec-aritmetica": [
       {
         "id": "reto-aritmetica-1",
-        "tipo": "opcion",
-        "pregunta": "¿Qué representa la letra 'x' en álgebra?",
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "Una caja con un número misterioso",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "Un error en la fórmula",
-            "ok": false,
-            "reflexion": "Recuerda que la x es como una etiqueta para algo que queremos descubrir."
-          },
-          {
-            "id": "c",
-            "texto": "Una operación imposible",
-            "ok": false,
-            "reflexion": "No es imposible, es un valor que debemos despejar."
-          }
-        ],
-        "pista": "Piensa en el ejemplo de la caja fuerte."
+        "tipo": "sustituidor",
+        "pregunta": "Encuentra el valor numérico de la expresión sustituyendo x = 2, y = 1",
+        "variables": {
+          "x": 2,
+          "y": 1
+        },
+        "expresion": "2x + y",
+        "respuestaCorrecta": 5,
+        "pista": "Sustituye cada variable por su valor numérico y luego resuelve las operaciones."
+      },
+      {
+        "id": "reto-aritmetica-2",
+        "tipo": "sustituidor",
+        "pregunta": "Encuentra el valor numérico de la expresión sustituyendo x = 3, y = 2",
+        "variables": {
+          "x": 3,
+          "y": 2
+        },
+        "expresion": "x^2 - y",
+        "respuestaCorrecta": 7,
+        "pista": "Sustituye cada variable por su valor numérico y luego resuelve las operaciones."
+      },
+      {
+        "id": "reto-aritmetica-3",
+        "tipo": "sustituidor",
+        "pregunta": "Encuentra el valor numérico de la expresión sustituyendo x = 4, y = 3",
+        "variables": {
+          "x": 4,
+          "y": 3
+        },
+        "expresion": "2x + y",
+        "respuestaCorrecta": 11,
+        "pista": "Sustituye cada variable por su valor numérico y luego resuelve las operaciones."
+      },
+      {
+        "id": "reto-aritmetica-4",
+        "tipo": "sustituidor",
+        "pregunta": "Encuentra el valor numérico de la expresión sustituyendo x = 5, y = 4",
+        "variables": {
+          "x": 5,
+          "y": 4
+        },
+        "expresion": "x^2 - y",
+        "respuestaCorrecta": 21,
+        "pista": "Sustituye cada variable por su valor numérico y luego resuelve las operaciones."
+      },
+      {
+        "id": "reto-aritmetica-5",
+        "tipo": "sustituidor",
+        "pregunta": "Encuentra el valor numérico de la expresión sustituyendo x = 6, y = 5",
+        "variables": {
+          "x": 6,
+          "y": 5
+        },
+        "expresion": "2x + y",
+        "respuestaCorrecta": 17,
+        "pista": "Sustituye cada variable por su valor numérico y luego resuelve las operaciones."
       }
     ],
     "lec-exponentes": [
       {
         "id": "reto-exponentes-1",
-        "tipo": "opcion",
-        "pregunta": "Si tengo a³ * a², ¿Qué hago con los exponentes?",
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "Los sumo, el resultado es a⁵",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "Los multiplico, el resultado es a⁶",
-            "ok": false,
-            "reflexion": "Recuerda que a³ son 3 letras 'a' multiplicadas y a² son 2. En total cuántas hay?"
-          },
-          {
-            "id": "c",
-            "texto": "No se pueden combinar",
-            "ok": false,
-            "reflexion": "Tienen la misma base 'a', sí se pueden combinar."
-          }
-        ],
-        "pista": "Escribe la forma extendida: (a*a*a) * (a*a)"
+        "tipo": "simplificador",
+        "pregunta": "Simplifica la siguiente expresión usando las leyes de los exponentes",
+        "expresion": "a^{2} \\cdot a^{1}",
+        "respuestaCorrecta": "a^{3}",
+        "pista": "Recuerda: si multiplicas sumas los exponentes, si divides los restas."
+      },
+      {
+        "id": "reto-exponentes-2",
+        "tipo": "simplificador",
+        "pregunta": "Simplifica la siguiente expresión usando las leyes de los exponentes",
+        "expresion": "\\frac{x^{5}}{x^{2}}",
+        "respuestaCorrecta": "x^{3}",
+        "pista": "Recuerda: si multiplicas sumas los exponentes, si divides los restas."
+      },
+      {
+        "id": "reto-exponentes-3",
+        "tipo": "simplificador",
+        "pregunta": "Simplifica la siguiente expresión usando las leyes de los exponentes",
+        "expresion": "a^{4} \\cdot a^{3}",
+        "respuestaCorrecta": "a^{7}",
+        "pista": "Recuerda: si multiplicas sumas los exponentes, si divides los restas."
+      },
+      {
+        "id": "reto-exponentes-4",
+        "tipo": "simplificador",
+        "pregunta": "Simplifica la siguiente expresión usando las leyes de los exponentes",
+        "expresion": "\\frac{x^{7}}{x^{4}}",
+        "respuestaCorrecta": "x^{3}",
+        "pista": "Recuerda: si multiplicas sumas los exponentes, si divides los restas."
+      },
+      {
+        "id": "reto-exponentes-5",
+        "tipo": "simplificador",
+        "pregunta": "Simplifica la siguiente expresión usando las leyes de los exponentes",
+        "expresion": "a^{6} \\cdot a^{5}",
+        "respuestaCorrecta": "a^{11}",
+        "pista": "Recuerda: si multiplicas sumas los exponentes, si divides los restas."
       }
     ],
     "lec-balanza": [
       {
         "id": "reto-balanza-1",
         "tipo": "balanza",
-        "pregunta": "Resuelve la ecuación 2x + 5 = 8",
-        "opciones": [],
-        "pista": "Primero elimina las bolitas de ambos lados al mismo tiempo arrastrándolas a la caneca."
+        "pregunta": "Encuentra el valor de x aislando las cajas en la balanza.",
+        "ecuacionOriginal": "2x + 1 = 5",
+        "platilloIzquierdo": {
+          "terminos": [
+            "x",
+            "x",
+            "1"
+          ],
+          "mostrarTres": false
+        },
+        "platilloDerecho": {
+          "valor": 5
+        },
+        "pista": "Mueve los números a la mesa para equilibrar y luego divide las cajas."
+      },
+      {
+        "id": "reto-balanza-2",
+        "tipo": "balanza",
+        "pregunta": "Encuentra el valor de x aislando las cajas en la balanza.",
+        "ecuacionOriginal": "3x + 2 = 11",
+        "platilloIzquierdo": {
+          "terminos": [
+            "x",
+            "x",
+            "x",
+            "1",
+            "1"
+          ],
+          "mostrarTres": false
+        },
+        "platilloDerecho": {
+          "valor": 11
+        },
+        "pista": "Mueve los números a la mesa para equilibrar y luego divide las cajas."
+      },
+      {
+        "id": "reto-balanza-3",
+        "tipo": "balanza",
+        "pregunta": "Encuentra el valor de x aislando las cajas en la balanza.",
+        "ecuacionOriginal": "2x + 3 = 11",
+        "platilloIzquierdo": {
+          "terminos": [
+            "x",
+            "x",
+            "1",
+            "1",
+            "1"
+          ],
+          "mostrarTres": false
+        },
+        "platilloDerecho": {
+          "valor": 11
+        },
+        "pista": "Mueve los números a la mesa para equilibrar y luego divide las cajas."
+      },
+      {
+        "id": "reto-balanza-4",
+        "tipo": "balanza",
+        "pregunta": "Encuentra el valor de x aislando las cajas en la balanza.",
+        "ecuacionOriginal": "3x + 1 = 16",
+        "platilloIzquierdo": {
+          "terminos": [
+            "x",
+            "x",
+            "x",
+            "1"
+          ],
+          "mostrarTres": false
+        },
+        "platilloDerecho": {
+          "valor": 16
+        },
+        "pista": "Mueve los números a la mesa para equilibrar y luego divide las cajas."
+      },
+      {
+        "id": "reto-balanza-5",
+        "tipo": "balanza",
+        "pregunta": "Encuentra el valor de x aislando las cajas en la balanza.",
+        "ecuacionOriginal": "2x + 2 = 14",
+        "platilloIzquierdo": {
+          "terminos": [
+            "x",
+            "x",
+            "1",
+            "1"
+          ],
+          "mostrarTres": false
+        },
+        "platilloDerecho": {
+          "valor": 14
+        },
+        "pista": "Mueve los números a la mesa para equilibrar y luego divide las cajas."
       }
     ],
     "lec-productos": [
       {
         "id": "reto-productos-1",
-        "tipo": "opcion",
-        "pregunta": "¿Cuál es el área total de un cuadrado de lado (a+b)?",
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "a² + 2ab + b²",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "a² + b²",
-            "ok": false,
-            "reflexion": "Si solo sumas los cuadrados pequeños, estás olvidando los dos rectángulos de ab."
-          },
-          {
-            "id": "c",
-            "texto": "2a + 2b",
-            "ok": false,
-            "reflexion": "Ese es el perímetro, no el área."
-          }
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
+        "expresion": "(a+b)^2",
+        "modelo": "cuadrado_binomio",
+        "piezas": [
+          "a^2",
+          "ab",
+          "ab",
+          "b^2"
         ],
-        "pista": "Recuerda las 4 piezas del cuadrado: una de a², una de b², y dos rectángulos de ab."
+        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
+      },
+      {
+        "id": "reto-productos-2",
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
+        "expresion": "(a+b)^2",
+        "modelo": "cuadrado_binomio",
+        "piezas": [
+          "a^2",
+          "ab",
+          "ab",
+          "b^2"
+        ],
+        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
+      },
+      {
+        "id": "reto-productos-3",
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
+        "expresion": "(a+b)^2",
+        "modelo": "cuadrado_binomio",
+        "piezas": [
+          "a^2",
+          "ab",
+          "ab",
+          "b^2"
+        ],
+        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
+      },
+      {
+        "id": "reto-productos-4",
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
+        "expresion": "(a+b)^2",
+        "modelo": "cuadrado_binomio",
+        "piezas": [
+          "a^2",
+          "ab",
+          "ab",
+          "b^2"
+        ],
+        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
+      },
+      {
+        "id": "reto-productos-5",
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $(a+b)^2$",
+        "expresion": "(a+b)^2",
+        "modelo": "cuadrado_binomio",
+        "piezas": [
+          "a^2",
+          "ab",
+          "ab",
+          "b^2"
+        ],
+        "pista": "Arrastra las piezas para formar un cuadrado perfecto de lado (a+b)."
       }
     ],
     "lec-diferencia": [
       {
         "id": "reto-diferencia-1",
-        "tipo": "opcion",
-        "pregunta": "La diferencia de cuadrados a² - b² se puede factorizar como:",
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "(a+b)(a-b)",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "(a-b)²",
-            "ok": false,
-            "reflexion": "Ese es el cuadrado de un binomio, no la diferencia de cuadrados."
-          },
-          {
-            "id": "c",
-            "texto": "a² + b²",
-            "ok": false,
-            "reflexion": "Eso es una suma de cuadrados, la cual no es factorizable en los reales."
-          }
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
+        "expresion": "a^2 - b^2",
+        "modelo": "diferencia_cuadrados",
+        "piezas": [
+          "a^2",
+          "b^2"
         ],
-        "pista": "Piensa en las dimensiones del rectángulo final cuando rearmamos la figura en forma de L."
+        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
+      },
+      {
+        "id": "reto-diferencia-2",
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
+        "expresion": "a^2 - b^2",
+        "modelo": "diferencia_cuadrados",
+        "piezas": [
+          "a^2",
+          "b^2"
+        ],
+        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
+      },
+      {
+        "id": "reto-diferencia-3",
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
+        "expresion": "a^2 - b^2",
+        "modelo": "diferencia_cuadrados",
+        "piezas": [
+          "a^2",
+          "b^2"
+        ],
+        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
+      },
+      {
+        "id": "reto-diferencia-4",
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
+        "expresion": "a^2 - b^2",
+        "modelo": "diferencia_cuadrados",
+        "piezas": [
+          "a^2",
+          "b^2"
+        ],
+        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
+      },
+      {
+        "id": "reto-diferencia-5",
+        "tipo": "areas",
+        "pregunta": "Arma el modelo geométrico para la expresión $a^2 - b^2$",
+        "expresion": "a^2 - b^2",
+        "modelo": "diferencia_cuadrados",
+        "piezas": [
+          "a^2",
+          "b^2"
+        ],
+        "pista": "Muestra cómo al quitar el cuadrado pequeño (b²) queda una figura en forma de L."
       }
     ],
     "lec-pitagoras": [
       {
         "id": "reto-pitagoras-1",
-        "tipo": "opcion",
-        "pregunta": "En un triángulo rectángulo, ¿cómo se relacionan las áreas construidas sobre los lados?",
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "El área del cuadrado mayor es igual a la suma de las áreas de los dos cuadrados menores.",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "La suma de los tres cuadrados siempre es cero.",
-            "ok": false,
-            "reflexion": "Las áreas son siempre números positivos."
-          },
-          {
-            "id": "c",
-            "texto": "El cuadrado de un cateto es la suma de los otros dos cuadrados.",
-            "ok": false,
-            "reflexion": "La hipotenusa (el lado más largo) es el que lleva la suma de los dos pequeños."
-          }
+        "tipo": "areas",
+        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
+        "expresion": "a^2 + b^2 = c^2",
+        "modelo": "pitagoras",
+        "piezas": [
+          "a^2",
+          "b^2"
         ],
-        "pista": "Recuerda cómo los cuadrados de áreas 9 y 16 llenaron exactamente el de área 25."
+        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
+      },
+      {
+        "id": "reto-pitagoras-2",
+        "tipo": "areas",
+        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
+        "expresion": "a^2 + b^2 = c^2",
+        "modelo": "pitagoras",
+        "piezas": [
+          "a^2",
+          "b^2"
+        ],
+        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
+      },
+      {
+        "id": "reto-pitagoras-3",
+        "tipo": "areas",
+        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
+        "expresion": "a^2 + b^2 = c^2",
+        "modelo": "pitagoras",
+        "piezas": [
+          "a^2",
+          "b^2"
+        ],
+        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
+      },
+      {
+        "id": "reto-pitagoras-4",
+        "tipo": "areas",
+        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
+        "expresion": "a^2 + b^2 = c^2",
+        "modelo": "pitagoras",
+        "piezas": [
+          "a^2",
+          "b^2"
+        ],
+        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
+      },
+      {
+        "id": "reto-pitagoras-5",
+        "tipo": "areas",
+        "pregunta": "Demuestra el Teorema de Pitágoras $a^2 + b^2 = c^2$",
+        "expresion": "a^2 + b^2 = c^2",
+        "modelo": "pitagoras",
+        "piezas": [
+          "a^2",
+          "b^2"
+        ],
+        "pista": "Mueve las piezas de los catetos para cubrir la hipotenusa (c²)."
       }
     ]
   },
