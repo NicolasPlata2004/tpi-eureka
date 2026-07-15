@@ -517,6 +517,28 @@
           "c": 13
         },
         "pista": "Usa la fórmula: c = √ (a² + b²). En este caso: c = √ (25 + 144)."
+      },
+      {
+        "id": "reto-pitagoras-4",
+        "tipo": "ladder",
+        "pregunta": "Calcula la longitud de la escalera (c) apoyada sobre la pared",
+        "valores": {
+          "a": 9,
+          "b": 12,
+          "c": 15
+        },
+        "pista": "Utiliza la fórmula de la hipotenusa: c = √ (a² + b²). Para a=9 y b=12: c = √ (81 + 144) = √ 225."
+      },
+      {
+        "id": "reto-pitagoras-5",
+        "tipo": "ladder",
+        "pregunta": "Calcula la longitud de la escalera (c) apoyada sobre la pared",
+        "valores": {
+          "a": 8,
+          "b": 15,
+          "c": 17
+        },
+        "pista": "Utiliza la fórmula de la hipotenusa: c = √ (a² + b²). Para a=8 y b=15: c = √ (64 + 225) = √ 289."
       }
     ]
   },

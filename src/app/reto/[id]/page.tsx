@@ -8,6 +8,7 @@ import Sustituidor from '@/components/Sustituidor';
 import Simplificador from '@/components/Simplificador';
 import AreaModel from '@/components/AreaModel';
 import PitagorasModel from '@/components/PitagorasModel';
+import LadderModel from '@/components/LadderModel';
 
 type ProgressStatus = 'pending' | 'current' | 'correct' | 'correct_with_errors';
 
@@ -235,6 +236,14 @@ export default function RetoPage({ params }: PageProps) {
         )}
         {currentReto.tipo === 'pitagoras' && (
           <PitagorasModel 
+            key={currentReto.id}
+            reto={currentReto} 
+            onCorrectAction={handleCorrectAction} 
+            onErrorAction={handleErrorAction} 
+          />
+        )}
+        {currentReto.tipo === 'ladder' && (
+          <LadderModel 
             key={currentReto.id}
             reto={currentReto} 
             onCorrectAction={handleCorrectAction} 
