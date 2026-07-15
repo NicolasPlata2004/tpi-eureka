@@ -92,31 +92,6 @@ export default function Dashboard() {
     fetchData();
   }, [router]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-bg-soft1 flex flex-col">
-        <Header />
-        <div className="flex-1 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-10 h-10 border-4 border-blue-action border-t-transparent rounded-full animate-spin" />
-            <span className="text-sm font-medium text-slate-500">Cargando tu camino...</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Generar estado de racha visual para los días L M M J V S D
-  const diasSemana = [
-    { label: 'L', activa: user ? user.racha >= 1 : false },
-    { label: 'M', activa: user ? user.racha >= 2 : false },
-    { label: 'M', activa: user ? user.racha >= 3 : false },
-    { label: 'J', activa: user ? user.racha >= 4 : false },
-    { label: 'V', activa: user ? user.racha >= 5 : false, hoy: true },
-    { label: 'S', activa: user ? user.racha >= 6 : false },
-    { label: 'D', activa: user ? user.racha >= 7 : false }
-  ];
-
   const processedUnits = useMemo(() => {
     if (!units || !Array.isArray(units)) return [];
     return units.map(unit => {
@@ -162,6 +137,31 @@ export default function Dashboard() {
       };
     }).filter((u): u is Unit => u !== null);
   }, [units, watchedVideos]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-bg-soft1 flex flex-col">
+        <Header />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-10 h-10 border-4 border-blue-action border-t-transparent rounded-full animate-spin" />
+            <span className="text-sm font-medium text-slate-500">Cargando tu camino...</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Generar estado de racha visual para los días L M M J V S D
+  const diasSemana = [
+    { label: 'L', activa: user ? user.racha >= 1 : false },
+    { label: 'M', activa: user ? user.racha >= 2 : false },
+    { label: 'M', activa: user ? user.racha >= 3 : false },
+    { label: 'J', activa: user ? user.racha >= 4 : false },
+    { label: 'V', activa: user ? user.racha >= 5 : false, hoy: true },
+    { label: 'S', activa: user ? user.racha >= 6 : false },
+    { label: 'D', activa: user ? user.racha >= 7 : false }
+  ];
 
   return (
     <div className="min-h-screen bg-bg-soft1 flex flex-col select-none">
