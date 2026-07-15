@@ -206,14 +206,9 @@ export default function RetoPage({ params }: PageProps) {
         {reto.tipo === 'balanza' && (
           <div className="md:col-span-7 flex flex-col items-center gap-4 w-full">
             <Balanza
-              ecuacion={resuelto ? (reto.ecuacionResuelta || '2x = 8') : reto.ecuacionOriginal}
-              mostrarTres={!resuelto}
-              ladoDerecho={resuelto ? (reto.ladoDerechoResuelto || '8') : String(reto.platilloDerecho?.valor)}
               onCorrectAction={handleCorrectAction}
               resuelto={resuelto}
-              subtitulo={resuelto ? (reto.subtituloResuelto || '¡Eso es! Quitaste 3 de cada lado de la balanza.') : undefined}
-              fichaValor={reto.fichaValor}
-              terminoIzquierdo={reto.terminoIzquierdo}
+              subtitulo={resuelto ? (reto.subtituloResuelto || '¡Eso es! Despejaste la ecuación manteniendo el equilibrio.') : undefined}
             />
           </div>
         )}

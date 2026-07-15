@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { getUserById } from '@/lib/db';
+import { getUserById, getSiguienteRetoRecomendado } from '@/lib/db';
 
 export async function GET() {
   try {
@@ -16,16 +16,9 @@ export async function GET() {
       return NextResponse.json({ error: 'No autorizado' }, { status: 403 });
     }
 
-    // Retorna el siguiente reto recomendado
-    return NextResponse.json({
-      retoRecomendado: {
-        id: 'reto-balanza-1',
-        titulo: 'La balanza: resolver 2x + 3 = 11',
-        leccionId: 'lec-balanza',
-        duracionEstimada: 'Video 5 min + Reto',
-        unidadNombre: 'Ecuaciones lineales'
-      }
-    });
+    // Retorna el siguiente reto recomendado de manera dinámica
+    const retoRecomendado = getSiguienteRetoRecomendado(user.id);
+    return NextResponse.json({ retoRecomendado });
   } catch (error) {
     return NextResponse.json({ error: 'Error del servidor' }, { status: 500 });
   }

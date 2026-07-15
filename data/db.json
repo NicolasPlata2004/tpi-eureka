@@ -56,491 +56,344 @@
   "units": [
     {
       "id": "u1",
-      "nombre": "Números enteros y racionales",
+      "nombre": "De la Aritmética al Álgebra",
       "estado": "completa",
       "habilidades": [
         {
           "id": "h1-1",
-          "nombre": "Operaciones básicas",
-          "completa": true
+          "nombre": "¿Qué es una variable?",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-aritmetica"
         },
         {
           "id": "h1-2",
-          "nombre": "Fraccionarios y decimales",
-          "completa": true
-        },
-        {
-          "id": "h1-3",
-          "nombre": "Propiedades de los números",
-          "completa": true
-        },
-        {
-          "id": "h1-4",
-          "nombre": "Recta numérica",
-          "completa": true
+          "nombre": "Traducción a lenguaje algebraico",
+          "completa": false
         }
       ]
     },
     {
       "id": "u2",
-      "nombre": "Expresiones algebraicas",
+      "nombre": "El Lenguaje de los Exponentes",
       "estado": "en-progreso",
-      "progreso": 40,
+      "progreso": 50,
       "habilidades": [
         {
           "id": "h2-1",
-          "nombre": "Términos y coeficientes",
-          "completa": true
+          "nombre": "Leyes de los Exponentes",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-exponentes"
         },
         {
           "id": "h2-2",
-          "nombre": "Traducir enunciados",
-          "completa": true
-        },
-        {
-          "id": "h2-3",
-          "nombre": "Reducir términos semejantes",
-          "completa": false,
-          "activa": true,
-          "leccionId": "lec-semejantes"
-        },
-        {
-          "id": "h2-4",
-          "nombre": "Valor numérico",
+          "nombre": "Suma y resta de polinomios",
           "completa": false
         },
         {
-          "id": "h2-5",
-          "nombre": "Propiedad distributiva",
+          "id": "h2-3",
+          "nombre": "Radicales",
           "completa": false
         }
       ]
     },
     {
       "id": "u3",
-      "nombre": "Ecuaciones lineales",
+      "nombre": "Ecuaciones Lineales",
       "estado": "iniciada",
       "progreso": 16,
       "habilidades": [
         {
           "id": "h3-1",
-          "nombre": "Ecuaciones de un paso",
-          "completa": true
-        },
-        {
-          "id": "h3-2",
-          "nombre": "La balanza: resolver 2x + 3 = 11",
+          "nombre": "Ecuación Balanza",
           "completa": false,
           "activa": true,
           "leccionId": "lec-balanza"
         },
         {
+          "id": "h3-2",
+          "nombre": "Ecuaciones con variables en ambos lados",
+          "completa": false
+        },
+        {
           "id": "h3-3",
-          "nombre": "Ecuaciones con paréntesis",
-          "completa": false
-        },
-        {
-          "id": "h3-4",
-          "nombre": "Variables en ambos lados",
-          "completa": false
-        },
-        {
-          "id": "h3-5",
-          "nombre": "Problemas de aplicación",
-          "completa": false
-        },
-        {
-          "id": "h3-6",
-          "nombre": "Sistemas 2x2 intro",
+          "nombre": "Sistemas de ecuaciones 2x2",
           "completa": false
         }
       ]
     },
     {
       "id": "u4",
-      "nombre": "Factorización",
+      "nombre": "Productos Notables y Factorización",
       "estado": "bloqueada",
       "progreso": 0,
       "habilidades": [
         {
           "id": "h4-1",
-          "nombre": "Factor común",
-          "completa": false
+          "nombre": "Productos Notables",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-productos"
         },
         {
           "id": "h4-2",
-          "nombre": "Diferencia de cuadrados",
-          "completa": false
+          "nombre": "Diferencia de Cuadrados",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-diferencia"
         },
         {
           "id": "h4-3",
-          "nombre": "Trinomio cuadrado perfecto",
+          "nombre": "Factor común y Trinomios",
           "completa": false
+        }
+      ]
+    },
+    {
+      "id": "u5",
+      "nombre": "Geometría y Aplicaciones",
+      "estado": "bloqueada",
+      "progreso": 0,
+      "habilidades": [
+        {
+          "id": "h5-1",
+          "nombre": "Teorema de Pitágoras",
+          "completa": false,
+          "activa": true,
+          "leccionId": "lec-pitagoras"
         },
         {
-          "id": "h4-4",
-          "nombre": "Trinomios de la forma x^2+bx+c",
+          "id": "h5-2",
+          "nombre": "Cálculo de áreas y volumen",
           "completa": false
         }
       ]
     }
   ],
   "lecciones": {
-    "lec-semejantes": {
-      "id": "lec-semejantes",
-      "titulo": "Reducir términos semejantes",
-      "unidadId": "u2",
-      "videoUrl": "/manim/semejantes.mp4",
-      "duracion": "04:15",
+    "lec-aritmetica": {
+      "id": "lec-aritmetica",
+      "titulo": "¿Qué es una variable?",
+      "unidadId": "u1",
+      "videoUrl": "/manim/AritmeticaAlgebra.mp4",
+      "duracion": "01:30",
       "ideasClave": [
-        "Solo puedes juntar términos que tengan las mismas letras con los mismos exponentes.",
-        "Los coeficientes se suman o restan según sus signos.",
-        "Las manzanas con manzanas y las peras con peras: 3a + 2a = 5a, pero 3a + 2b no se puede simplificar."
+        "El álgebra no es más difícil que la aritmética.",
+        "La x no es un monstruo, es una etiqueta."
       ],
-      "concepto": "Términos Semejantes",
-      "conceptoDetalle": "Son aquellos términos que tienen la misma parte literal (mismas variables elevadas a los mismos exponentes). Por ejemplo, 5x y -3x son semejantes, pero 5x y 5x² no lo son."
+      "concepto": "Variables",
+      "conceptoDetalle": "Una letra simplemente es el nombre que le ponemos a una caja con un número misterioso."
+    },
+    "lec-exponentes": {
+      "id": "lec-exponentes",
+      "titulo": "Leyes de los Exponentes",
+      "unidadId": "u2",
+      "videoUrl": "/manim/LeyesExponentes.mp4",
+      "duracion": "01:00",
+      "ideasClave": [
+        "Multiplicar la misma base suma exponentes.",
+        "Si entiendes de dónde salen, ya no se te olvidan."
+      ],
+      "concepto": "Leyes de Exponentes",
+      "conceptoDetalle": "Las fórmulas son solo un atajo para no escribir las potencias extendidas."
     },
     "lec-balanza": {
       "id": "lec-balanza",
-      "titulo": "La balanza: resolver 2x + 3 = 11",
+      "titulo": "Ecuación Balanza: 2x + 5 = 8",
       "unidadId": "u3",
-      "videoUrl": "/manim/balanza.mp4",
-      "duracion": "05:40",
+      "videoUrl": "/manim/EcuacionBalanza.mp4",
+      "duracion": "00:45",
       "ideasClave": [
-        "Una ecuación es una balanza: los dos lados pesan lo mismo.",
-        "Lo que hagas en un lado, hazlo también en el otro.",
-        "Para deshacer una suma, resta. Para deshacer una multiplicación, divide."
+        "Una ecuación es una balanza en equilibrio.",
+        "Para mantenerla estable, lo que haces de un lado, hazlo del otro."
       ],
-      "concepto": "Mantener la igualdad",
-      "conceptoDetalle": "Si a los dos lados les quitas lo mismo, la balanza sigue equilibrada: 2x + 3 - 3 = 11 - 3. Al final obtienes una ecuación más simple."
+      "concepto": "Despeje de Ecuaciones",
+      "conceptoDetalle": "Resuelve la ecuación sin desbalancear la igualdad en ningún momento."
+    },
+    "lec-productos": {
+      "id": "lec-productos",
+      "titulo": "Productos Notables",
+      "unidadId": "u4",
+      "videoUrl": "/manim/ProductosNotables.mp4",
+      "duracion": "01:10",
+      "ideasClave": [
+        "Un producto notable no es una fórmula mágica, es un área.",
+        "Podemos visualizar (a+b)² como un cuadrado formado por 4 piezas."
+      ],
+      "concepto": "Áreas y Álgebra",
+      "conceptoDetalle": "Aprenderás a multiplicar binomios usando representaciones geométricas."
+    },
+    "lec-diferencia": {
+      "id": "lec-diferencia",
+      "titulo": "Diferencia de Cuadrados",
+      "unidadId": "u4",
+      "videoUrl": "/manim/DiferenciaDeCuadrados.mp4",
+      "duracion": "01:00",
+      "ideasClave": [
+        "Al quitar b² de a², nos queda una figura en L.",
+        "Podemos reacomodar esa figura en un rectángulo de (a+b)(a-b)."
+      ],
+      "concepto": "Geometría en la Factorización",
+      "conceptoDetalle": "La diferencia de dos cuadrados siempre se factoriza como el producto de dos binomios conjugados."
+    },
+    "lec-pitagoras": {
+      "id": "lec-pitagoras",
+      "titulo": "Teorema de Pitágoras",
+      "unidadId": "u5",
+      "videoUrl": "/manim/TeoremaPitagoras.mp4",
+      "duracion": "00:50",
+      "ideasClave": [
+        "No es una fórmula abstracta. Son tres cuadrados reales.",
+        "Las áreas pequeñas caben exactamente en la grande."
+      ],
+      "concepto": "Triángulos Rectángulos",
+      "conceptoDetalle": "El cuadrado de la hipotenusa es igual a la suma de los cuadrados de los catetos."
     }
   },
   "retos": {
-    "lec-semejantes": [
+    "lec-aritmetica": [
       {
-        "id": "reto-semejantes-1",
+        "id": "reto-aritmetica-1",
         "tipo": "opcion",
-        "pregunta": "¿Cuál de las siguientes opciones agrupa correctamente los términos semejantes de 3x + 2y - x + 5y?",
+        "pregunta": "¿Qué representa la letra 'x' en álgebra?",
         "opciones": [
           {
             "id": "a",
-            "texto": "2x + 7y",
+            "texto": "Una caja con un número misterioso",
             "ok": true
           },
           {
             "id": "b",
-            "texto": "4x + 7y",
+            "texto": "Un error en la fórmula",
             "ok": false,
-            "reflexion": "¡Cuidado con el signo! El término es -x, lo que significa restar 1x a 3x. ¿Cuánto es 3 - 1?"
+            "reflexion": "Recuerda que la x es como una etiqueta para algo que queremos descubrir."
           },
           {
             "id": "c",
-            "texto": "9xy",
+            "texto": "Una operación imposible",
             "ok": false,
-            "reflexion": "Recuerda que no puedes sumar x con y. Son de familias diferentes (manzanas con peras). Deben quedar separados."
+            "reflexion": "No es imposible, es un valor que debemos despejar."
           }
         ],
-        "pista": "Agrupa las x con las x (3x - x) y las y con las y (2y + 5y). Luego realiza las operaciones numéricas de los coeficientes."
-      },
+        "pista": "Piensa en el ejemplo de la caja fuerte."
+      }
+    ],
+    "lec-exponentes": [
       {
-        "id": "reto-semejantes-2",
+        "id": "reto-exponentes-1",
         "tipo": "opcion",
-        "pregunta": "Simplifica la expresión algebraica: 5a + 3b - 2a - b",
+        "pregunta": "Si tengo a³ * a², ¿Qué hago con los exponentes?",
         "opciones": [
           {
             "id": "a",
-            "texto": "3a + 2b",
+            "texto": "Los sumo, el resultado es a⁵",
             "ok": true
           },
           {
             "id": "b",
-            "texto": "3a - 2b",
+            "texto": "Los multiplico, el resultado es a⁶",
             "ok": false,
-            "reflexion": "Casi. Fíjate en los términos de b: tienes +3b y luego restas b (-1b). ¿3 - 1 es positivo o negativo?"
+            "reflexion": "Recuerda que a³ son 3 letras 'a' multiplicadas y a² son 2. En total cuántas hay?"
           },
           {
             "id": "c",
-            "texto": "7a + 4b",
+            "texto": "No se pueden combinar",
             "ok": false,
-            "reflexion": "Recuerda restar los términos que tienen signos negativos, como -2a y -b. No los sumes todos."
+            "reflexion": "Tienen la misma base 'a', sí se pueden combinar."
           }
         ],
-        "pista": "Agrupa y resta: para la variable 'a' calcula (5a - 2a), y para la 'b' calcula (3b - 1b)."
-      },
-      {
-        "id": "reto-semejantes-3",
-        "tipo": "opcion",
-        "pregunta": "¿Se puede simplificar la expresión 4x + 4y en un solo término?",
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "No, porque tienen variables diferentes (x e y).",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "Sí, sumando los coeficientes para obtener 8xy.",
-            "ok": false,
-            "reflexion": "Recuerda la regla de oro: solo puedes simplificar términos si sus letras y exponentes son exactamente iguales. x e y no se pueden mezclar."
-          },
-          {
-            "id": "c",
-            "texto": "Sí, multiplicando para dar 16xy.",
-            "ok": false,
-            "reflexion": "Estamos sumando términos, no multiplicando. Si las letras no son iguales, la expresión ya está en su forma más simple."
-          }
-        ],
-        "pista": "Intenta recordar si puedes sumar peras con manzanas. Si no tienen la misma variable, no se pueden sumar."
-      },
-      {
-        "id": "reto-semejantes-4",
-        "tipo": "opcion",
-        "pregunta": "Simplifica la siguiente expresión: 7x - 2x + 4y - y",
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "5x + 3y",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "9x + 5y",
-            "ok": false,
-            "reflexion": "Recuerda que los signos menos indican resta. A 7x debes restarle 2x, y a 4y debes restarle una y."
-          },
-          {
-            "id": "c",
-            "texto": "8xy",
-            "ok": false,
-            "reflexion": "No puedes juntar x con y, deben quedar separadas."
-          }
-        ],
-        "pista": "Agrupa las x con las x (7x - 2x) y las y con las y (4y - y)."
-      },
-      {
-        "id": "reto-semejantes-5",
-        "tipo": "opcion",
-        "pregunta": "Simplifica: 10a + 5b - 10a + 2b",
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "7b",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "20a + 7b",
-            "ok": false,
-            "reflexion": "Cuidado con los signos. Tienes 10a y luego restas 10a. ¿Qué pasa con ellas?"
-          },
-          {
-            "id": "c",
-            "texto": "17ab",
-            "ok": false,
-            "reflexion": "No debes mezclar a con b."
-          }
-        ],
-        "pista": "Si a 10a le restas 10a, el resultado es 0. Solo quedan los términos con b."
+        "pista": "Escribe la forma extendida: (a*a*a) * (a*a)"
       }
     ],
     "lec-balanza": [
       {
         "id": "reto-balanza-1",
         "tipo": "balanza",
-        "pregunta": "¿Cuál es el primer paso para despejar x en la ecuación 2x + 3 = 11?",
-        "ecuacionOriginal": "2x + 3 = 11",
-        "platilloIzquierdo": {
-          "terminos": [
-            "2x",
-            "+3"
-          ],
-          "mostrarTres": true
-        },
-        "platilloDerecho": {
-          "valor": 11
-        },
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "Restar 3 en ambos lados",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "Dividir todo entre 2",
-            "ok": false,
-            "reflexion": "Buena idea para más adelante, pero el 3 sigue sumando en el lado izquierdo. Si divides ahora, también tendrías que dividir el +3. ¿Qué operación deshace una suma?"
-          },
-          {
-            "id": "c",
-            "texto": "Sumar 3 en ambos lados",
-            "ok": false,
-            "reflexion": "Fíjate en el platillo izquierdo: el 3 ya está sumando. Si sumas otro 3, la x quedará más acompañada. ¿Qué operación deshace una suma?"
-          }
-        ],
-        "pista": "La x está multiplicada por 2 y luego le sumaron 3. Para despejarla, deshaz primero lo último que le hicieron (+3)."
-      },
+        "pregunta": "Resuelve la ecuación 2x + 5 = 8",
+        "opciones": [],
+        "pista": "Primero elimina las bolitas de ambos lados al mismo tiempo arrastrándolas a la caneca."
+      }
+    ],
+    "lec-productos": [
       {
-        "id": "reto-balanza-2",
-        "tipo": "balanza",
-        "pregunta": "¿Cuál es el primer paso para despejar x en la ecuación 3x + 5 = 20?",
-        "ecuacionOriginal": "3x + 5 = 20",
-        "platilloIzquierdo": {
-          "terminos": [
-            "3x",
-            "+5"
-          ],
-          "mostrarTres": true
-        },
-        "platilloDerecho": {
-          "valor": 20
-        },
+        "id": "reto-productos-1",
+        "tipo": "opcion",
+        "pregunta": "¿Cuál es el área total de un cuadrado de lado (a+b)?",
         "opciones": [
           {
             "id": "a",
-            "texto": "Restar 5 en ambos lados",
+            "texto": "a² + 2ab + b²",
             "ok": true
           },
           {
             "id": "b",
-            "texto": "Dividir todo entre 3",
+            "texto": "a² + b²",
             "ok": false,
-            "reflexion": "Si divides ahora, tendrías que dividir también el 5. Es mucho más fácil quitar primero lo que suma o resta."
+            "reflexion": "Si solo sumas los cuadrados pequeños, estás olvidando los dos rectángulos de ab."
           },
           {
             "id": "c",
-            "texto": "Sumar 5 en ambos lados",
+            "texto": "2a + 2b",
             "ok": false,
-            "reflexion": "El 5 ya está sumando en el lado izquierdo. Si sumas 5 más, tendrás 3x + 10. Para deshacer una suma debes aplicar la resta."
+            "reflexion": "Ese es el perímetro, no el área."
           }
         ],
-        "pista": "Deshaz primero la suma de 5 en el platillo izquierdo restando 5 en ambos lados de la balanza.",
-        "ecuacionResuelta": "3x = 15",
-        "ladoDerechoResuelto": "15",
-        "subtituloResuelto": "¡Excelente! Al restar 5 en ambos lados, la balanza se mantiene equilibrada en 3x = 15.",
-        "fichaValor": "+5",
-        "terminoIzquierdo": "3x"
-      },
+        "pista": "Recuerda las 4 piezas del cuadrado: una de a², una de b², y dos rectángulos de ab."
+      }
+    ],
+    "lec-diferencia": [
       {
-        "id": "reto-balanza-3",
-        "tipo": "balanza",
-        "pregunta": "Tienes la balanza equilibrada en 3x = 15. ¿Cómo despejas x para saber su valor final?",
-        "ecuacionOriginal": "3x = 15",
-        "platilloIzquierdo": {
-          "terminos": [
-            "3x"
-          ],
-          "mostrarTres": true
-        },
-        "platilloDerecho": {
-          "valor": 15
-        },
+        "id": "reto-diferencia-1",
+        "tipo": "opcion",
+        "pregunta": "La diferencia de cuadrados a² - b² se puede factorizar como:",
         "opciones": [
           {
             "id": "a",
-            "texto": "Dividir ambos lados entre 3",
+            "texto": "(a+b)(a-b)",
             "ok": true
           },
           {
             "id": "b",
-            "texto": "Restar 3 en ambos lados",
+            "texto": "(a-b)²",
             "ok": false,
-            "reflexion": "El 3 está multiplicando a la x (3 veces x). Restar 3 no despejaría la x. ¿Qué operación matemática deshace una multiplicación?"
+            "reflexion": "Ese es el cuadrado de un binomio, no la diferencia de cuadrados."
           },
           {
             "id": "c",
-            "texto": "Multiplicar ambos lados por 3",
+            "texto": "a² + b²",
             "ok": false,
-            "reflexion": "Si multiplicas por 3, tendrías 9x = 45. ¡La x queda aún más acompañada! Aplica la operación inversa para despejar."
+            "reflexion": "Eso es una suma de cuadrados, la cual no es factorizable en los reales."
           }
         ],
-        "pista": "La x está multiplicada por 3. Para dejarla sola, divide entre 3 en ambos lados de la balanza.",
-        "ecuacionResuelta": "x = 5",
-        "ladoDerechoResuelto": "5",
-        "subtituloResuelto": "¡Perfecto! Dividiste ambos lados entre 3 y encontraste que x = 5.",
-        "fichaValor": "÷3",
-        "terminoIzquierdo": "x"
-      },
+        "pista": "Piensa en las dimensiones del rectángulo final cuando rearmamos la figura en forma de L."
+      }
+    ],
+    "lec-pitagoras": [
       {
-        "id": "reto-balanza-4",
-        "tipo": "balanza",
-        "pregunta": "¿Cuál es el primer paso para despejar x en la ecuación 4x + 2 = 14?",
-        "ecuacionOriginal": "4x + 2 = 14",
-        "platilloIzquierdo": {
-          "terminos": [
-            "4x",
-            "+2"
-          ],
-          "mostrarTres": true
-        },
-        "platilloDerecho": {
-          "valor": 14
-        },
+        "id": "reto-pitagoras-1",
+        "tipo": "opcion",
+        "pregunta": "En un triángulo rectángulo, ¿cómo se relacionan las áreas construidas sobre los lados?",
         "opciones": [
           {
             "id": "a",
-            "texto": "Restar 2 en ambos lados",
+            "texto": "El área del cuadrado mayor es igual a la suma de las áreas de los dos cuadrados menores.",
             "ok": true
           },
           {
             "id": "b",
-            "texto": "Dividir entre 4",
+            "texto": "La suma de los tres cuadrados siempre es cero.",
             "ok": false,
-            "reflexion": "Si divides ahora, tendrías que dividir también el 2. Es mejor quitar primero la suma."
+            "reflexion": "Las áreas son siempre números positivos."
           },
           {
             "id": "c",
-            "texto": "Sumar 2 en ambos lados",
+            "texto": "El cuadrado de un cateto es la suma de los otros dos cuadrados.",
             "ok": false,
-            "reflexion": "El 2 ya está sumando. Si sumas 2 más, tendrás 4x + 4. Debes deshacer la suma con una resta."
+            "reflexion": "La hipotenusa (el lado más largo) es el que lleva la suma de los dos pequeños."
           }
         ],
-        "pista": "Deshaz primero la suma de 2 en el platillo izquierdo restando 2 en ambos lados de la balanza.",
-        "ecuacionResuelta": "4x = 12",
-        "ladoDerechoResuelto": "12",
-        "subtituloResuelto": "¡Excelente! Al restar 2 en ambos lados, la balanza se mantiene equilibrada en 4x = 12.",
-        "fichaValor": "+2",
-        "terminoIzquierdo": "4x"
-      },
-      {
-        "id": "reto-balanza-5",
-        "tipo": "balanza",
-        "pregunta": "Tienes la balanza equilibrada en 4x = 12. ¿Cómo despejas x para saber su valor final?",
-        "ecuacionOriginal": "4x = 12",
-        "platilloIzquierdo": {
-          "terminos": [
-            "4x"
-          ],
-          "mostrarTres": true
-        },
-        "platilloDerecho": {
-          "valor": 12
-        },
-        "opciones": [
-          {
-            "id": "a",
-            "texto": "Dividir ambos lados entre 4",
-            "ok": true
-          },
-          {
-            "id": "b",
-            "texto": "Restar 4 en ambos lados",
-            "ok": false,
-            "reflexion": "El 4 está multiplicando a la x. Restar 4 no despejaría la x."
-          },
-          {
-            "id": "c",
-            "texto": "Multiplicar ambos lados por 4",
-            "ok": false,
-            "reflexion": "Si multiplicas por 4, la x queda aún más acompañada. Aplica la operación inversa (división)."
-          }
-        ],
-        "pista": "La x está multiplicada por 4. Para dejarla sola, divide entre 4 en ambos lados.",
-        "ecuacionResuelta": "x = 3",
-        "ladoDerechoResuelto": "3",
-        "subtituloResuelto": "¡Perfecto! Dividiste ambos lados entre 4 y encontraste que x = 3.",
-        "fichaValor": "÷4",
-        "terminoIzquierdo": "x"
+        "pista": "Recuerda cómo los cuadrados de áreas 9 y 16 llenaron exactamente el de área 25."
       }
     ]
   },
